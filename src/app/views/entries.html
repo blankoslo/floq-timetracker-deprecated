@@ -1,0 +1,18 @@
+<h2>Entries</h2>
+<div class="time-entries">
+<ul class="entry-list">
+  <li ng-repeat="entry in entries">
+    <div class="project-key">{{ entry.id }}</div>
+    <div class="time">{{ entry.time / 60 }}</div>
+    <div class="buttons">
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
+          ng-click="logHour(entry)">
+            <i class="material-icons">add</i>
+        </button>
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
+          ng-click="removeHour(entry)">
+            <i class="material-icons">remove</i>
+        </button>
+    </div>
+  </li>
+</ul>

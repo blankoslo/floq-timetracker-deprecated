@@ -1,5 +1,3 @@
-var webpackConfig = require('./webpack.test');
-
 // Reference: http://karma-runner.github.io/0.12/config/configuration-file.html
 module.exports = function karmaConfig (config) {
   config.set({
@@ -12,7 +10,7 @@ module.exports = function karmaConfig (config) {
     reporters: [
       // Reference: https://github.com/mlex/karma-spec-reporter
       // Set reporter to print detailed results to console
-      'spec',
+      'progress',
 
       // Reference: https://github.com/karma-runner/karma-coverage
       // Output code coverage files
@@ -20,7 +18,7 @@ module.exports = function karmaConfig (config) {
     ],
 
     files: [
-      // Grab all files in the app folder that contain .test.
+      // Grab all files in the app folder that contain .spec.
       'src/tests.webpack.js'
     ],
 
@@ -40,10 +38,18 @@ module.exports = function karmaConfig (config) {
 
     // Configure code coverage reporter
     coverageReporter: {
-      dir: 'build/coverage/',
-      type: 'html'
+      dir: 'coverage/',
+      reporters: [
+        {type: 'text-summary'},
+        {type: 'html'}
+      ]
     },
 
-    webpack: webpackConfig
+    webpack: require('./webpack.config'),
+
+    // Hide webpack build information from output
+    webpackMiddleware: {
+      noInfo: 'errors-only'
+    }
   });
 };
