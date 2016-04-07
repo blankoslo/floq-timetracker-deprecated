@@ -8,9 +8,7 @@ export default function() {
 
     $scope.logHour = function(entry) {
       Api.logEntry(entry.customer, entry.project, 1, new Date().toISOString(), 30).then(() => {
-        Api.getEntries(1).then((response) => {
-          $scope.entries = response.data;
-        });
+        updateEntries();
       });
     };
 
@@ -20,9 +18,8 @@ export default function() {
       });
     }
 
-    $scope.$on('dayChanged', function(event, day) {
-      console.log(day);
-      selectedDay = day.format("YYYY-MM-DD");
+    $scope.$on('dateChanged', function(event, date) {
+      selectedDay = date;
       updateEntries();
     })
 

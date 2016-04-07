@@ -3,7 +3,7 @@ import angular from 'angular';
 import appCtrl from './controllers/appCtrl.js'
 import appDirective from './directives/app.js';
 import entriesDirective from './directives/entries.js';
-import calendarDirective from './directives/calendar.js';
+import weeklyCalendar from './directives/weeklyCalendar.js';
 import apiFactory from './services/api.js';
 import '../style/main.scss';
 
@@ -13,7 +13,7 @@ angular.module(MODULE_NAME, [])
   .controller('AppCtrl', appCtrl)
   .directive('app', appDirective)
   .directive('entries', entriesDirective)
-  .directive('calendar', calendarDirective)
+  .directive('weekly', weeklyCalendar)
   .factory('Api', apiFactory);
 
 var appElement = document.createElement("app");
