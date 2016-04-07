@@ -3,12 +3,21 @@
   .entry-list {
     list-style: none;
     background-color: $color-light-gray;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
 
     li {
+      padding: 0 20px;
       display: flex;
       height: 72px;
       align-items: center;
       justify-content: space-around;
+      border-bottom:1px solid white;
+
+      &.list-header {
+        height:35px;
+      }
 
       .buttons {
         display: flex;
@@ -20,14 +29,24 @@
         }
       }
 
-      .project-key {
+      .project {
         flex: 1;
-        font-size: 16px;
+        display:flex;
+        flex-direction: column;
+        .key {
+
+        }
+        .title {
+          color: $color-gray-text;
+        }
       }
 
       .time {
         flex: 1;
         font-size:30px;
+        &.empty {
+          color: #ccc;
+        }
       }
     }
   }

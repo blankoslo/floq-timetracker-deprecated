@@ -1,0 +1,18 @@
+<button class="mdl-button mdl-js-button mdl-button--primary" ng-click="openProjectDialog()">
+  Legg til prosjekt
+</button>
+
+<dialog class="mdl-dialog dialog" ng-open="showDialog">
+  <h4 class="mdl-dialog__title">Legg til prosjekt</h4>
+  <div class="mdl-dialog__content">
+    <ul class="project-list mdl-list">
+      <li class="mdl-list__item" ng-repeat="project in projects" ng-click="appendProject(project)">
+          <span class="project-data">{{project.code}} {{project.customer}}</span>
+          <span class="project-title">{{project.title}}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button close" ng-click="showDialog = false">Lukk</button>
+  </div>
+</dialog>

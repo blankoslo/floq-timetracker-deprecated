@@ -1,0 +1,26 @@
+append-project {
+  display:flex;
+  justify-content: center;
+  .dialog {
+    width: 75%;
+    position: fixed;
+    top: 30%;
+    .project-list  {
+      li {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        &:hover {
+          background-color: rgba(158,158,158,.2);
+          cursor: pointer;
+        }
+
+        .project-title {
+          color: $color-gray-text;
+        }
+
+      }
+    }
+  }
+}

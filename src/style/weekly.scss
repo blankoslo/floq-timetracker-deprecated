@@ -3,6 +3,7 @@ weekly {
     color: $color-faded-black;
     font-size:14px;
     text-align: center;
+    margin:0;
   }
   .week {
     display:flex;
@@ -24,6 +25,7 @@ weekly {
       display:flex;
       flex-direction: column;
       padding:20px 0;
+      text-transform: capitalize;
 
       .dayInMonth {
         font-size:20px;
