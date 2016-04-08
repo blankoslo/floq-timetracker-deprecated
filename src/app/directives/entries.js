@@ -2,17 +2,17 @@ import moment from 'moment';
 
 export default function() {
 
-  var controller = ($scope, Api) => {
+  var controller = ($scope, Api, Auth) => {
     var selectedDay = moment().format("YYYY-MM-DD");
 
     $scope.logHour = (entry) => {
-      Api.logEntry(entry.customer, entry.project, 1, selectedDay, 30).then(() => {
+      Api.logEntry(entry.customer, entry.project, Auth.getEmployee().id, selectedDay, 30).then(() => {
         updateEntries();
       });
     };
 
     $scope.removeHour = (entry) => {
-      Api.logEntry(entry.customer, entry.project, 1, selectedDay, -30).then(() => {
+      Api.logEntry(entry.customer, entry.project, Auth.getEmployee().id, selectedDay, -30).then(() => {
         updateEntries();
       });
     }
@@ -42,12 +42,16 @@ export default function() {
     })
 
     function updateEntries() {
-      Api.getEntries(1, selectedDay).then((response) => {
-        $scope.entries = response.data;
-      });
+      if (Auth.getEmployee().id) {
+        Api.getEntries(Auth.getEmployee().id, selectedDay).then((response) => {
+          $scope.entries = response.data;
+        });
+      }
     }
 
-    updateEntries();
+    $scope.$on('userChanged', (user) => {
+      updateEntries();
+    })
   }
 
   return {

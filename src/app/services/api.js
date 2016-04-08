@@ -1,6 +1,21 @@
 export default function($http) {
-  var apiUrl = 'http://localhost:3001';
+  var apiUrl = config.apiUrl || 'http://localhost:3001';
   return {
+
+    getEmployee: function(mail) {
+      return $http({
+        method: 'GET',
+        url: apiUrl + '/employee/' + mail
+      });
+    },
+
+    getLoggedInUser: function() {
+      return $http({
+        method: 'GET',
+        url: apiUrl + '/employee'
+      });
+    },
+
     getProjects: function() {
       return $http({
         method: 'GET',

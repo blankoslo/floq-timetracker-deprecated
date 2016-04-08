@@ -6,7 +6,6 @@ export default function() {
       $scope.openProjectDialog = () => {
         $scope.showDialog = true;
         Api.getProjects().then((result) => {
-          console.log(result.data);
           $scope.projects = result.data;
         });
       }
