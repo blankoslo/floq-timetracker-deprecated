@@ -1,58 +1,68 @@
 weekly {
-  .header {
-    color: $color-faded-black;
-    font-size:14px;
-    text-align: center;
-    margin:0;
-  }
-  .week {
-    display:flex;
-    list-style: none;
-    justify-content: space-around;
-    align-items: center;
-    padding:0;
-
-    li {
-      cursor: pointer;
-      &:hover {
-        color: gray;
-      }
+    .header {
+        color: $color-faded-black;
+        font-size: 14px;
+        text-align: center;
+        margin: 0;
     }
-
-    .day {
-      flex:1;
-      text-align: center;
-      display:flex;
-      flex-direction: column;
-      padding:20px 0;
-      text-transform: capitalize;
-
-      .dayInMonth {
-        font-size:20px;
-      }
-
-      .nameOfDay {
-        font-size:16px;
-      }
-
-      &.selected {
-        background-color: $color-pretty-pink;
-        color: white;
-        position: relative;
-        &:after {
-          $arrow-size: 10px;
-          content: '';
-          height: 0;
-          width: 0;
-          border-left: $arrow-size solid transparent;
-          border-right: $arrow-size solid transparent;
-          border-bottom: $arrow-size solid transparent;
-          border-top: $arrow-size solid $color-pretty-pink;
-          position: absolute;
-          left: calc(50% - #{$arrow-size});
-          bottom: -($arrow-size*2);
+    .week {
+        display: flex;
+        list-style: none;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0;
+        li {
+            cursor: pointer;
+            &:hover {
+                color: gray;
+            }
         }
-      }
+        .day {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            text-transform: capitalize;
+            color: $color-gray-text;
+            height: 86px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            
+            .dayInMonth {
+                font-size: 20px;
+            }
+            .nameOfDay {
+                font-size: 16px;
+            }
+            .logged {
+                font-size: 20px;
+                &:not(.empty) {
+                    color: black;
+                }
+            }
+            &.selected {
+                background-color: $color-pretty-pink;
+                color: white;
+                .logged {
+                    color: white;
+                }
+                position: relative;
+                &:after {
+                    $arrow-size: 10px;
+                    content: '';
+                    height: 0;
+                    width: 0;
+                    border-left: $arrow-size solid transparent;
+                    border-right: $arrow-size solid transparent;
+                    border-bottom: $arrow-size solid transparent;
+                    border-top: $arrow-size solid $color-pretty-pink;
+                    position: absolute;
+                    left: calc(50% - #{$arrow-size});
+                    bottom: -($arrow-size*2);
+                }
+            }
+        }
     }
-  }
 }

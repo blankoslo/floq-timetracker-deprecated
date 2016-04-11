@@ -9,6 +9,13 @@ export default function($http) {
       });
     },
 
+    getWeeklyEntries: function(employeeId, date) {
+      return $http({
+        method: 'GET',
+        url: apiUrl + '/entries/week/' + employeeId + '/' + date
+      });
+    },
+
     getLoggedInUser: function() {
       return $http({
         method: 'GET',

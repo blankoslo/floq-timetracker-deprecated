@@ -9,7 +9,8 @@ export default function() {
       weekDays.push({
         dayInMonth: date.get('date'),
         nameOfDay: date.format('ddd'),
-        date: date.format('YYYY-MM-DD')
+        date: date.format('YYYY-MM-DD'),
+        logged: 0
       });
       date = date.clone().add(1, 'd');
     }
@@ -17,17 +18,11 @@ export default function() {
   }
 
   return {
-    controller: ($scope, $rootScope) => {
-      $scope.$watch('selected', () => {
-        $rootScope.$broadcast('dateChanged', $scope.selected.format('YYYY-MM-DD'));
-      });
-    },
-    link: ($scope) => {
+    controller: ($scope, $rootScope, Api, Auth) => {
       var weekStart = moment().startOf('isoweek');
 
       $scope.selected = moment();
       $scope.week = buildWeek(weekStart);
-
 
       $scope.getHeader = () => {
           var weekNumber = weekStart.get('week');
@@ -58,6 +53,7 @@ export default function() {
           $scope.week = buildWeek(weekStart);
           $scope.selected = weekStart;
           $scope.weekNumber = weekStart.get('week');
+          fetchHoursForWeek();
       };
 
       $scope.next = () => {
@@ -65,7 +61,32 @@ export default function() {
           $scope.week = buildWeek(weekStart);
           $scope.selected = weekStart;
           $scope.weekNumber = weekStart.get('week');
+          fetchHoursForWeek();
       }
+
+      function fetchHoursForWeek() {
+        Api.getWeeklyEntries(Auth.getEmployee().id, weekStart.format('YYYY-MM-DD')).then((result) => {
+          appendHours($scope.week, result.data);
+        });
+      }
+
+      function appendHours(week, hours) {
+        hours.forEach((e) => {
+          var day = moment(e.date).get('day');
+          week[day-1].logged = e.sum;
+        });
+      }
+
+      $scope.$on('userChanged', () => {
+        fetchHoursForWeek();
+      })
+
+      $scope.$watch('selected', (change) => {
+        $rootScope.$broadcast('dateChanged', $scope.selected.format('YYYY-MM-DD'));
+      });
+    },
+    link: ($scope) => {
+
     },
     template: require('../views/weeklyCalendar.html')
   }

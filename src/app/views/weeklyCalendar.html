@@ -13,6 +13,7 @@
       ng-class="{selected: isSelected(day.date)}">
       <span class="dayInMonth">{{day.dayInMonth}}</span>
       <span class="nameOfDay">{{day.nameOfDay}}</span>
+      <span class="logged" ng-class="{empty: day.logged == 0}">{{day.logged / 60}}</span>
     </li>
     <li ng-click="next()">
       <i class="material-icons">
