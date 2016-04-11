@@ -1,12 +1,14 @@
 export default class AppCtrl {
-  constructor($rootScope, Auth, Api) {
+  constructor($scope, $rootScope, Auth, Api) {
 
-    this.test= 'working';
-    
+    this.test = 'working';
+    $scope.loading = true;
+
     var overrideUser = window.location.hash.substring(1);
 
     function broadcastEmployee() {
       $rootScope.$broadcast('userChanged', Auth.getEmployee());
+      $scope.loading = false;
     }
 
     Api.getLoggedInUser().then((result) => {
