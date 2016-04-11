@@ -2,10 +2,12 @@
   <li class="list-header">{{selected.format('dddd D MMMM YYYY')}}</li>
   <li ng-repeat="entry in entries">
     <div class="project">
-      <span class="id">{{ entry.project }} {{ entry.customer }}</span>
+      <span class="id">{{ entry.customer }} {{ entry.project }}</span>
       <span class="title">{{ entry.title }}</span>
     </div>
-    <div class="time" ng-class="{empty: entry.time == 0}">{{ entry.time / 60 }}</div>
+    <div class="time">
+      <input type="text" ng-class="{empty: entry.hours == 0}" ng-blur="updateEntry(entry)" ng-model="entry.hours"/>
+    </div>
     <div class="buttons">
         <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
           ng-click="logHour(entry)">

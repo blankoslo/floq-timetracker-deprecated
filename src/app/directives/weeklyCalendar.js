@@ -24,7 +24,7 @@ export default function() {
       $scope.selected = moment();
       $scope.week = buildWeek(weekStart);
 
-      $scope.getHeader = () => {
+      $scope.weekRange = () => {
         var weekNumber = weekStart.get('week');
         var startDate = weekStart.get('date');
         var endOfWeek = weekStart.clone().endOf("isoweek");
@@ -88,7 +88,7 @@ export default function() {
         fetchHoursForWeek();
       });
 
-      $scope.$on('entryChanged', (event, minutes, day) => {
+      $scope.$on('dayTotalChange', (event, minutes, day) => {
         appendTime(day, minutes);
       });
 

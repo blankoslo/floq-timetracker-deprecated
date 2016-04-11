@@ -29,7 +29,7 @@ entries {
       }
 
       .project {
-        flex: 1;
+        flex: 2;
         display:flex;
         flex-direction: column;
         .key {
@@ -41,8 +41,16 @@ entries {
       }
 
       .time {
-        flex: 1;
+        flex:1;
         font-size:30px;
+
+        input {
+          font-size:30px;
+          width:60px;
+          background: transparent;
+          border:0;
+        }
+
         &.empty {
           color: #ccc;
         }

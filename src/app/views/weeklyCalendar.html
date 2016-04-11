@@ -1,24 +1,24 @@
 <div class="weekly">
-  <h3 class="header">{{ getHeader() }}</h3>
-  <ul class="week">
-    <li ng-click="previous()">
-    <i class="material-icons">
-      arrow_back
-    </i>
-  </li>
-    <li class="day"
-      ng-repeat="day in week"
-      ng-click="select(day.date)"
-      title="{{day.date}}"
-      ng-class="{selected: isSelected(day.date)}">
-      <span class="dayInMonth">{{day.dayInMonth}}</span>
-      <span class="nameOfDay">{{day.nameOfDay}}</span>
-      <span class="logged" ng-class="{empty: day.logged == 0}">{{day.logged / 60}}</span>
-    </li>
-    <li ng-click="next()">
-      <i class="material-icons">
-        arrow_forward
-      </i>
-    </li>
-  </ul>
+    <h3 class="header">{{ weekRange() }}</h3>
+    <ul class="week">
+        <li ng-click="previous()">
+            <button class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">arrow_back</i>
+            </button>
+        </li>
+        <li class="day"
+        ng-repeat="day in week"
+        ng-click="select(day.date)"
+        title="{{day.date}}"
+        ng-class="{selected: isSelected(day.date)}">
+            <span class="dayInMonth">{{day.dayInMonth}}</span>
+            <span class="nameOfDay">{{day.nameOfDay}}</span>
+            <span class="logged" ng-class="{empty: day.logged == 0}">{{day.logged / 60}}</span>
+        </li>
+        <li ng-click="next()">
+          <button class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons">arrow_forward</i>
+          </button>
+        </li>
+    </ul>
 </div>

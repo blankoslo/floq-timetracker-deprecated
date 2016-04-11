@@ -4,6 +4,9 @@ weekly {
         font-size: 14px;
         text-align: center;
         margin: 0;
+        .week {
+          margin-right:10px;
+        }
     }
     .week {
         display: flex;
@@ -13,6 +16,9 @@ weekly {
         padding: 0;
         li {
             cursor: pointer;
+            button {
+              margin:10px;
+            }
             &:hover {
                 color: gray;
             }
@@ -29,7 +35,7 @@ weekly {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            
+
             .dayInMonth {
                 font-size: 20px;
             }
