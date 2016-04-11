@@ -4,7 +4,7 @@
 
 <div class="mdl-dialog dialog" ng-show="showDialog">
   <h4 class="mdl-dialog__title">Legg til prosjekt</h4>
-  <div class="mdl-dialog__content">
+  <div class="mdl-dialog__content content">
     <ul class="project-list mdl-list">
       <li class="mdl-list__item" ng-repeat="project in projects" ng-click="appendProject(project)">
           <span class="project-data">{{project.code}} {{project.customer}}</span>
