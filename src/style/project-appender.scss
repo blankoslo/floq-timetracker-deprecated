@@ -4,7 +4,7 @@ append-project {
   display:flex;
   justify-content: center;
   .dialog {
-    width: 75%;
+    width: 50%;
     position: fixed;
     top: calc(50% - #{$dialog-content-height});
     left: 0px;
