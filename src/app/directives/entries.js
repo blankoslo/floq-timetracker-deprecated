@@ -9,7 +9,7 @@ export default function() {
 
     $scope.logHour = (entry) => {
       var logMinutes = 0;
-      if (entry.time == 0) {
+      if (entry.logged == 0) {
         entry.logged = MINUTE_INCREMENT_FIRST_CLICK;
         logMinutes = MINUTE_INCREMENT_FIRST_CLICK;
       } else {
