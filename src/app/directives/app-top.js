@@ -3,7 +3,7 @@ import moment from 'moment';
 export default () => {
   return {
     template: require('../views/app-top.html'),
-    controller: ($scope, Auth) => {
+    controller: ($scope, $rootScope, Auth) => {
 
       $scope.bg = Auth.getTopImage();
       $scope.$on('userChanged', (event, user) => {
@@ -12,6 +12,10 @@ export default () => {
       $scope.$on('dateChanged', (event, date) => {
         $scope.month = moment(date).format("MMMM YYYY");
       });
+
+      $scope.goToThisWeek = () => {
+        $rootScope.$broadcast('resetCalendar');
+      }
     }
   }
 }

@@ -82,6 +82,13 @@ export default function() {
         appendTime(day, minutes);
       });
 
+      $scope.$on('resetCalendar', () => {
+        weekStart = moment().startOf('isoweek');
+        $scope.selected = moment();
+        $scope.week = buildWeek(weekStart);
+        fetchHoursForWeek();
+      });
+
       $scope.$watch('selected', (change) => {
         $rootScope.$broadcast('dateChanged', $scope.selected.format('YYYY-MM-DD'));
       });
