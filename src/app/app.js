@@ -11,6 +11,7 @@ import apiFactory from './services/api.js';
 import authFactory from './services/auth.js';
 import tokenInterceptor from './services/tokenInterceptor.js';
 import minuteFilter from './filters/minute.js';
+import appTopDirective from './directives/app-top.js';
 
 import '../style/main.scss';
 
@@ -23,6 +24,7 @@ angular.module(MODULE_NAME, [])
   .directive('weekly', weeklyCalendar)
   .directive('appendProject', projectAppender)
   .directive('employee', employeeDirective)
+  .directive('appTop', appTopDirective)
   .factory('TokenInterceptor', tokenInterceptor)
   .factory('Auth', authFactory)
   .factory('Api', apiFactory)

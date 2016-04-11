@@ -24,20 +24,10 @@ export default function() {
       $scope.selected = moment();
       $scope.week = buildWeek(weekStart);
 
-      $scope.weekRange = () => {
+      $scope.displayWeek = () => {
         var weekNumber = weekStart.get('week');
-        var startDate = weekStart.get('date');
-        var endOfWeek = weekStart.clone().endOf("isoweek");
-        var endDate = endOfWeek.get('date');
-        var year = endOfWeek.format('YYYY');
-        var month = () => {
-          if (weekStart.isSame(endOfWeek, 'month')) {
-            return weekStart.format('MMMM')
-          } else {
-            return `${weekStart.format('MMMM')}/${endOfWeek.format('MMMM')}`
-          }
-        }
-        return `Uke ${weekNumber} ${startDate} - ${endDate}. ${month()} ${year}`;
+
+        return `Uke ${weekNumber}`;
       }
 
       $scope.select = (date) => {
