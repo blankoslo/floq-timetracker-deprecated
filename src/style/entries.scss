@@ -5,52 +5,40 @@ entries {
     margin: 0;
     padding: 0;
     font-size: 16px;
-
     li {
       padding: 0 20px;
       display: flex;
       height: 72px;
       align-items: center;
       justify-content: space-around;
-      border-bottom:1px solid white;
-
+      border-bottom: 1px solid white;
       &.list-header {
-        height:35px;
+        height: 35px;
       }
-
       .buttons {
         display: flex;
         flex: 1;
         justify-content: space-between;
-
-        button {
-
-        }
+        button {}
       }
-
       .project {
         flex: 2;
-        display:flex;
+        display: flex;
         flex-direction: column;
-        .key {
-
-        }
+        .key {}
         .title {
           color: $color-gray-text;
         }
       }
-
       .time {
-        flex:1;
-        font-size:30px;
-
+        flex: 1;
+        font-size: 30px;
         input {
-          font-size:30px;
-          width:60px;
+          font-size: 30px;
+          width: 60px;
           background: transparent;
-          border:0;
+          border: 0;
         }
-
         &.empty {
           color: #ccc;
         }
