@@ -89,6 +89,6 @@ export default function() {
     link: ($scope) => {
 
     },
-    template: require('../views/weeklyCalendar.html')
+    template: require('../views/calendar.html')
   }
 }

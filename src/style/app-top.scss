@@ -1,8 +1,18 @@
 .app-top {
   background: linear-gradient(to bottom, #fbc02d 0%,#f8485e 100%);
-  height: 150px;
-  background-image: url(https://source.unsplash.com/category/nature);
+  height: 180px;
   background-size:cover;
   text-shadow: 1px 1px 10px $color-faded-black;
   position: relative;
+
+  h2 {
+    position: absolute;
+    bottom: 0;
+      color: white;
+      text-transform: uppercase;
+      font-size: 16px;
+      padding: 20px;
+      letter-spacing: 5px;
+      margin: 0;
+  }
 }

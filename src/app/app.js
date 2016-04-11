@@ -4,9 +4,8 @@ import moment from 'moment';
 import appCtrl from './controllers/appCtrl.js'
 import appDirective from './directives/app.js';
 import entriesDirective from './directives/entries.js';
-import weeklyCalendar from './directives/weeklyCalendar.js';
+import calendar from './directives/calendar.js';
 import projectAppender from './directives/projectAppender.js';
-import employeeDirective from './directives/employee.js';
 import apiFactory from './services/api.js';
 import authFactory from './services/auth.js';
 import tokenInterceptor from './services/tokenInterceptor.js';
@@ -21,9 +20,8 @@ angular.module(MODULE_NAME, [])
   .controller('AppCtrl', appCtrl)
   .directive('app', appDirective)
   .directive('entries', entriesDirective)
-  .directive('weekly', weeklyCalendar)
+  .directive('calendar', calendar)
   .directive('appendProject', projectAppender)
-  .directive('employee', employeeDirective)
   .directive('appTop', appTopDirective)
   .factory('TokenInterceptor', tokenInterceptor)
   .factory('Auth', authFactory)
