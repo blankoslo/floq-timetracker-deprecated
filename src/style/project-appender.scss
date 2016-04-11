@@ -5,7 +5,7 @@ append-project {
   justify-content: center;
   .dialog {
     width: 75%;
-    position: absolute;
+    position: fixed;
     top: calc(50% - #{$dialog-content-height});
     left: 0px;
     right: 0px;
