@@ -24,7 +24,7 @@ export default function() {
     };
 
     $scope.removeHour = (entry) => {
-      entry.time -= MINUTE_INCREMENT;
+      entry.logged -= MINUTE_INCREMENT;
       entry.hours = entry.logged / 60;
       $rootScope.$broadcast('dayTotalChange', -MINUTE_INCREMENT, selectedDay);
       Api.logEntry(entry.customer, entry.project, Auth.getEmployee().id, selectedDay, -MINUTE_INCREMENT).then(() => {
