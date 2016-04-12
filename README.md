@@ -1,4 +1,7 @@
 # Timestamp
+
+[![Build Status](https://travis-ci.org/blankoslo/timestamp.svg?branch=master)](https://travis-ci.org/blankoslo/timestamp)<Paste>
+
 Timetracking for Blank
 
 ## Getting started
