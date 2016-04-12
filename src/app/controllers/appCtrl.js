@@ -1,5 +1,5 @@
 export default class AppCtrl {
-  constructor($scope, $rootScope, Auth, Api) {
+  constructor($scope, $rootScope, Auth, Api, Notification) {
     let APPLICATION_ROOT = "timestamp";
 
     this.getOverrideUser = (fromPath) => {
@@ -22,6 +22,9 @@ export default class AppCtrl {
         Api.getEmployee(overrideUser).then((result) => {
           Auth.setEmployee(result.data);
           broadcastEmployee();
+        }, () => {
+          $scope.loading = false;
+          Notification.error(`Fant ikke overstyrt ansatt '${overrideUser}'`, 100000);
         })
       } else {
         Auth.setEmployee(result.data);
@@ -29,7 +32,8 @@ export default class AppCtrl {
       }
 
     }, (result) => {
-      console.error(mail + " is not a valid employee");
+      $scope.loading = false;
+      Notification.error("Fant ikke innlogget ansatt", 100000);
     });
   }
 

@@ -10,6 +10,7 @@ import apiFactory from './services/api.js';
 import authFactory from './services/auth.js';
 import tokenInterceptor from './services/tokenInterceptor.js';
 import appTopDirective from './directives/app-top.js';
+import notification from './services/notification.js';
 
 import '../style/main.scss';
 
@@ -23,6 +24,7 @@ angular.module(MODULE_NAME, [])
   .directive('appendProject', projectAppender)
   .directive('appTop', appTopDirective)
   .factory('TokenInterceptor', tokenInterceptor)
+  .factory('Notification', notification)
   .factory('Auth', authFactory)
   .factory('Api', apiFactory)
   .config(['$httpProvider', function($httpProvider) {

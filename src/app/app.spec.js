@@ -4,7 +4,7 @@ import 'babel-polyfill';
 describe('app', () => {
   describe('AppCtrl', () => {
     var ctrl;
-    var myScope;
+    var scope;
     var Auth;
     var Api;
 
@@ -21,17 +21,17 @@ describe('app', () => {
 
         }
       };
-      myScope = $rootScope.$new()
+      scope = $rootScope.$new()
       ctrl = $controller('AppCtrl', {
-        $scope: myScope,
+        $scope: scope,
         $rootScope: $rootScope,
         Auth: Auth,
         Api: Api
       });
     }));
 
-    it('should have working test', () => {
-      expect(myScope.loading).toBe(true);
+    it('should be loading at start', () => {
+      expect(scope.loading).toBe(true);
     });
 
     it('should get overriden user', () => {

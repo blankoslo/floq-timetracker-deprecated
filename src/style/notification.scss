@@ -1,0 +1,18 @@
+.notification {
+  position: fixed;
+  top: 60px;
+  background-color: $color-pretty-pink;
+  color: white;
+  left: calc(50% - 150px);
+  z-index: 10;
+  text-align: center;
+  width: 300px;
+  &.active {
+    display: block;
+  }
+  .message {
+    padding: 14px 12px 14px 24px;
+    vertical-align: middle;
+    color: #fff;
+  }
+}

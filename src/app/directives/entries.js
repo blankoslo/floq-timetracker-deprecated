@@ -33,14 +33,16 @@ export default function() {
     }
 
     $scope.updateEntry = (entry) => {
-      var input = entry.hours.replace(/,/g, '.') * 60;
-      var logged = entry.logged;
-      var diff = input - logged;
-      if (diff != 0) {
-        $rootScope.$broadcast('dayTotalChange', diff, selectedDay);
-        Api.logEntry(entry.customer, entry.project, Auth.getEmployee().id, selectedDay, diff).then(() => {
-          fetchEntries();
-        });
+      if (entry.hours) {
+        let input = entry.hours.replace(/,/g, '.') * 60;
+        let logged = entry.logged;
+        let diff = input - logged;
+        if (diff != 0) {
+          $rootScope.$broadcast('dayTotalChange', diff, selectedDay);
+          Api.logEntry(entry.customer, entry.project, Auth.getEmployee().id, selectedDay, diff).then(() => {
+            fetchEntries();
+          });
+        }
       }
     }
 
