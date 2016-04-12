@@ -20,7 +20,7 @@ module.exports = {
     ],
     devtool: 'source-map',
     module: {
-        preLoaders: [],
+        preLoaders: [ { test: /\.js?$/, loaders: ['eslint'] } ],
         loaders: [{
             test: /\.js$/,
             loader: 'babel',
