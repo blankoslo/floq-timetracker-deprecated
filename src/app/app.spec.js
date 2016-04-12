@@ -33,5 +33,9 @@ describe('app', () => {
     it('should have working test', () => {
       expect(myScope.loading).toBe(true);
     });
+
+    it('should get overriden user', () => {
+      expect(ctrl.getOverrideUser("/timestamp/lasse")).toBe("lasse");
+    });
   });
 })

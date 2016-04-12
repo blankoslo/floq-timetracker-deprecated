@@ -1,10 +1,15 @@
 export default class AppCtrl {
   constructor($scope, $rootScope, Auth, Api) {
+    let APPLICATION_ROOT = "timestamp/";
 
-    this.test = 'working';
+    this.getOverrideUser = (fromPath) => {
+      return fromPath.substring(fromPath.lastIndexOf(APPLICATION_ROOT) + APPLICATION_ROOT.length);
+    };
+
     $scope.loading = true;
 
-    var overrideUser; // = window.location.hash.substring(1);
+    let path = window.location.pathname;
+    let overrideUser = this.getOverrideUser(path);
 
     function broadcastEmployee() {
       $rootScope.$broadcast('userChanged', Auth.getEmployee());
@@ -27,4 +32,5 @@ export default class AppCtrl {
       console.error(mail + " is not a valid employee");
     });
   }
+
 }
