@@ -6,6 +6,9 @@
   color: white;
   position: relative;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   .employeeName {
     text-transform: uppercase;
     font-size: 16px;
