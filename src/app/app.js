@@ -44,14 +44,17 @@ moment.locale('no', {
 
 var config = window.config = window.config || {};
 document.addEventListener('readystatechange', () => {
-  if (document.readyState === 'complete') {
-    const appElement = document.createElement('app');
-    const attachTo = document.getElementById('app');
+  //Attach to app element when ready
+  if (document.readyState === "complete") {
+    let appElement = document.createElement("app");
+    let attachTo = document.getElementById("app");
     if (attachTo) {
       attachTo.appendChild(appElement);
     }
-    angular.element(document.getElementById('app')).ready(() => {
-      angular.bootstrap(document.getElementById('app'), [MODULE_NAME]);
+    angular.element(document.getElementById("app")).ready(() => {
+      angular.bootstrap(document.getElementById("app"), [MODULE_NAME]);
+      // Initialize material javascript on dynamically added components
+      if (componentHandler) componentHandler.upgradeAllRegistered();
     });
   }
 });

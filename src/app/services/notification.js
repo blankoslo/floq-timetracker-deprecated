@@ -1,12 +1,12 @@
 export default ($rootScope, $compile) => {
-  const ACTIVE_CLASS = 'active';
-  const CONTAINER = 'body';
-  const template = require('../views/notification.html');
+  let ACTIVE_CLASS = 'active';
+  let CONTAINER = 'app';
+  let template = require('../views/notification.html');
 
   return {
     error: (message, timer = 5000) => {
-      const scope = $rootScope.$new();
-      const containerElement = angular.element(document.getElementsByTagName(CONTAINER));
+      let scope = $rootScope.$new();
+      let containerElement = angular.element(document.getElementById(CONTAINER));
       scope.message = message;
       const element = $compile(template)(scope);
 

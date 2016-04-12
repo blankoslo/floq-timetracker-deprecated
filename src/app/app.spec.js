@@ -37,10 +37,13 @@ describe('app', () => {
       expect(ctrl.getOverrideUser("/timestamp/lasse")).toBe("lasse");
     });
 
-    it('should not get overriden user if not present', () => {
+    it('should not get overriden user if not present and trailing slash', () => {
       expect(ctrl.getOverrideUser("/timestamp/")).toBe('');
-      expect(ctrl.getOverrideUser("/timestamp")).toBe('');
-      expect(ctrl.getOverrideUser("/tyme")).toBe('');
     });
+
+    it('should not get overriden user if not present and not traling slash slash', () => {
+      expect(ctrl.getOverrideUser("/timestamp")).toBe('');
+    });
+
   });
 });

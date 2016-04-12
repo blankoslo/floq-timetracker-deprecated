@@ -4,9 +4,15 @@
 
 <div class="mdl-dialog dialog" ng-show="showDialog">
   <h4 class="mdl-dialog__title">Legg til prosjekt</h4>
+  <form action="#">
+  <div class="mdl-textfield mdl-js-textfield">
+    <input class="mdl-textfield__input" type="text" id="filterProjects" ng-model="filterProjects">
+    <label class="mdl-textfield__label" for="filterProjects">Filter</label>
+  </div>
+</form>
   <div class="mdl-dialog__content content">
     <ul class="project-list mdl-list">
-      <li class="mdl-list__item" ng-repeat="project in projects" ng-click="appendProject(project)">
+      <li class="mdl-list__item" ng-repeat="project in projects | filter:filterProjects " ng-click="appendProject(project)">
           <span class="project-data">{{project.customer}} {{project.code}}</span>
           <span class="project-title">{{project.title}}</span>
       </li>

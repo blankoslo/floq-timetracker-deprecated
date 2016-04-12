@@ -2,6 +2,8 @@
 Timetracking for Blank
 
 ## Getting started
+First you need to have timestamp-backend running on a node server
+
     npm install
     npm start
 

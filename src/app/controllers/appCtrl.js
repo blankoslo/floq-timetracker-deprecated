@@ -23,7 +23,6 @@ export default class AppCtrl {
           Auth.setEmployee(result.data);
           broadcastEmployee();
         }, () => {
-          $scope.loading = false;
           Notification.error(`Fant ikke overstyrt ansatt '${overrideUser}'`, 100000);
         })
       } else {
@@ -31,7 +30,6 @@ export default class AppCtrl {
         broadcastEmployee();
       }
     }, (result) => {
-      $scope.loading = false;
       Notification.error("Fant ikke innlogget ansatt", 100000);
     });
   }
