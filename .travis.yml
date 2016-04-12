@@ -1,12 +1,12 @@
 language: node_js
 node_js:
-- '5'
+  - '5'
 script:
-- npm run lint
-- npm test
+  - npm run lint
+  - npm test
 notifications:
   slack:
-  - heltblank:mDZuPnWzmVTOTUd8i7167IZx
+    - heltblank:mDZuPnWzmVTOTUd8i7167IZx
 deploy:
   provider: heroku
   app: blank-timestamp
