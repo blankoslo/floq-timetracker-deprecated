@@ -5,7 +5,9 @@
     "beforeEach": false,
     "describe": false,
     "expect": false,
-    "it": false
+    "it": false,
+    "config": false,
+    "componentHandler": false
   },
   "plugins": ["angular"],
   "parser": "babel-eslint",

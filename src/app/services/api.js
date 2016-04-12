@@ -1,5 +1,6 @@
 export default ($http) => {
-  var apiUrl = config.apiUrl || 'http://localhost:3001';
+  const config = window.config = window.config || {};
+  const apiUrl = config.apiUrl || 'http://localhost:3001';
   return {
 
     getEmployee(mail) {

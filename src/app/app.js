@@ -32,7 +32,20 @@ angular.module(MODULE_NAME, [])
   }]);
 
 moment.locale('no', {
-  months: 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'.split('_'),
+  months: [
+    'januar',
+    'februar',
+    'mars',
+    'april',
+    'mai',
+    'juni',
+    'juli',
+    'august',
+    'september',
+    'oktober',
+    'november',
+    'desember'
+  ],
   monthsShort: 'jan._feb._mars_apr._mai_juni_juli._aug_sept._okt._nov._des.'.split('_'),
   weekdays: 'søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag'.split('_'),
   weekdaysShort: 'søn_man_tir_ons_tor_fre_lør'.split('_'),
@@ -42,17 +55,16 @@ moment.locale('no', {
   }
 });
 
-var config = window.config = window.config || {};
 document.addEventListener('readystatechange', () => {
-  //Attach to app element when ready
-  if (document.readyState === "complete") {
-    let appElement = document.createElement("app");
-    let attachTo = document.getElementById("app");
+  // Attach to app element when ready
+  if (document.readyState === 'complete') {
+    const appElement = document.createElement('app');
+    const attachTo = document.getElementById('app');
     if (attachTo) {
       attachTo.appendChild(appElement);
     }
-    angular.element(document.getElementById("app")).ready(() => {
-      angular.bootstrap(document.getElementById("app"), [MODULE_NAME]);
+    angular.element(document.getElementById('app')).ready(() => {
+      angular.bootstrap(document.getElementById('app'), [MODULE_NAME]);
       // Initialize material javascript on dynamically added components
       if (componentHandler) componentHandler.upgradeAllRegistered();
     });

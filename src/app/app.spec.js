@@ -1,24 +1,23 @@
-import app from './app';
+import './app';
 import 'babel-polyfill';
 
 describe('app', () => {
   describe('AppCtrl', () => {
-    var ctrl;
-    var scope;
-    var Auth;
-    var Api;
+    let ctrl;
+    let scope;
+    let Auth;
+    let Api;
 
     beforeEach(angular.mock.module('timestamp'));
     beforeEach(angular.mock.inject(($controller, $rootScope) => {
       Auth = {};
       Api = {
-        getLoggedInUser: () => {
-          return new Promise((resolve) => {
+        getLoggedInUser: () =>
+          new Promise((resolve) => {
             setTimeout(() => {
               resolve('hans');
             }, 500);
-          });
-        }
+          })
       };
       scope = $rootScope.$new();
       ctrl = $controller('AppCtrl', {
@@ -34,16 +33,15 @@ describe('app', () => {
     });
 
     it('should get overriden user', () => {
-      expect(ctrl.getOverrideUser("/timestamp/lasse")).toBe("lasse");
+      expect(ctrl.getOverrideUser('/timestamp/lasse')).toBe('lasse');
     });
 
     it('should not get overriden user if not present and trailing slash', () => {
-      expect(ctrl.getOverrideUser("/timestamp/")).toBe('');
+      expect(ctrl.getOverrideUser('/timestamp/')).toBe('');
     });
 
     it('should not get overriden user if not present and not traling slash slash', () => {
-      expect(ctrl.getOverrideUser("/timestamp")).toBe('');
+      expect(ctrl.getOverrideUser('/timestamp')).toBe('');
     });
-
   });
 });

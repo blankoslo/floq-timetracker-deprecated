@@ -2,8 +2,8 @@ import moment from 'moment';
 
 export default () => {
   function buildWeek(start) {
-    var weekDays = [];
-    var date = start.clone();
+    const weekDays = [];
+    let date = start.clone();
     for (let i = 0; i < 7; i++) {
       weekDays.push({
         dayInMonth: date.get('date'),
@@ -18,13 +18,34 @@ export default () => {
 
   return {
     controller: ($scope, $rootScope, Api, Auth) => {
-      var weekStart = moment().startOf('isoweek');
+      let weekStart = moment().startOf('isoweek');
+
+      function appendTime(date, time) {
+        $scope.week.forEach((day) => {
+          if (moment(date).isSame(day.date, 'day')) {
+            day.logged = parseInt(day.logged) + time;
+          }
+        });
+      }
+
+      function appendWeeklyLog(hours) {
+        hours.forEach((e) => {
+          appendTime(e.date, e.sum);
+        });
+      }
+
+      function fetchHoursForWeek() {
+        Api.getWeeklyEntries(Auth.getEmployee().id, weekStart.format('YYYY-MM-DD'))
+          .then((result) => {
+            appendWeeklyLog(result.data);
+          });
+      }
 
       $scope.selected = moment();
       $scope.week = buildWeek(weekStart);
 
       $scope.displayWeek = () => {
-        var weekNumber = weekStart.get('week');
+        const weekNumber = weekStart.get('week');
 
         return `Uke ${weekNumber}`;
       };
@@ -51,26 +72,6 @@ export default () => {
         fetchHoursForWeek();
       };
 
-      function fetchHoursForWeek() {
-        Api.getWeeklyEntries(Auth.getEmployee().id, weekStart.format('YYYY-MM-DD')).then((result) => {
-          appendWeeklyLog(result.data);
-        });
-      }
-
-      function appendWeeklyLog(hours) {
-        hours.forEach((e) => {
-          appendTime(e.date, e.sum);
-        });
-      }
-
-      function appendTime(date, time) {
-        $scope.week.forEach((day) => {
-          if (moment(date).isSame(day.date, 'day')) {
-            day.logged = parseInt(day.logged) + time;
-          }
-        });
-      }
-
       $scope.$on('userChanged', () => {
         fetchHoursForWeek();
       });
@@ -86,12 +87,9 @@ export default () => {
         fetchHoursForWeek();
       });
 
-      $scope.$watch('selected', (change) => {
+      $scope.$watch('selected', () => {
         $rootScope.$broadcast('dateChanged', $scope.selected.format('YYYY-MM-DD'));
       });
-    },
-    link: ($scope) => {
-
     },
     template: require('../views/calendar.html')
   };
