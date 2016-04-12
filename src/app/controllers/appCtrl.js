@@ -1,4 +1,5 @@
 export default class AppCtrl {
+<<<<<<< HEAD
   constructor($scope, $rootScope, Auth, Api, Notification) {
     let APPLICATION_ROOT = "timestamp";
 
@@ -6,6 +7,10 @@ export default class AppCtrl {
       return fromPath.substring(fromPath.lastIndexOf(APPLICATION_ROOT) + APPLICATION_ROOT.length).replace(/\//g, '');
     };
 
+=======
+  constructor($scope, $rootScope, Auth, Api) {
+    this.test = 'working';
+>>>>>>> feature/eslint
     $scope.loading = true;
 
     let path = window.location.pathname;
@@ -30,11 +35,9 @@ export default class AppCtrl {
         Auth.setEmployee(result.data);
         broadcastEmployee();
       }
-
     }, (result) => {
       $scope.loading = false;
       Notification.error("Fant ikke innlogget ansatt", 100000);
     });
   }
-
 }

@@ -1,14 +1,14 @@
 export default ($rootScope, $compile) => {
-  let ACTIVE_CLASS = 'active';
-  let CONTAINER = 'body';
-  let template = require('../views/notification.html');
+  const ACTIVE_CLASS = 'active';
+  const CONTAINER = 'body';
+  const template = require('../views/notification.html');
 
   return {
     error: (message, timer = 5000) => {
-      let scope = $rootScope.$new();
-      let containerElement = angular.element(document.getElementsByTagName(CONTAINER));
+      const scope = $rootScope.$new();
+      const containerElement = angular.element(document.getElementsByTagName(CONTAINER));
       scope.message = message;
-      let element = $compile(template)(scope);
+      const element = $compile(template)(scope);
 
       containerElement.append(element);
       element.addClass(ACTIVE_CLASS);
@@ -18,5 +18,5 @@ export default ($rootScope, $compile) => {
         element.remove();
       }, timer);
     }
-  }
-}
+  };
+};

@@ -1,15 +1,15 @@
 import moment from 'moment';
 
-export default function() {
+export default () => {
   var MINUTE_INCREMENT = 30;
   var MINUTE_INCREMENT_FIRST_CLICK = 450;
 
   var controller = ($scope, $rootScope, Api, Auth) => {
-    var selectedDay = moment().format("YYYY-MM-DD");
+    var selectedDay = moment().format('YYYY-MM-DD');
 
     $scope.logHour = (entry) => {
       var logMinutes = 0;
-      if (entry.logged == 0) {
+      if (entry.logged === 0) {
         entry.logged = MINUTE_INCREMENT_FIRST_CLICK;
         logMinutes = MINUTE_INCREMENT_FIRST_CLICK;
       } else {
@@ -30,21 +30,21 @@ export default function() {
       Api.logEntry(entry.customer, entry.project, Auth.getEmployee().id, selectedDay, -MINUTE_INCREMENT).then(() => {
 
       });
-    }
+    };
 
     $scope.updateEntry = (entry) => {
       if (entry.hours) {
-        let input = entry.hours.replace(/,/g, '.') * 60;
-        let logged = entry.logged;
-        let diff = input - logged;
-        if (diff != 0) {
+        const input = entry.hours.replace(/,/g, '.') * 60;
+        const logged = entry.logged;
+        const diff = input - logged;
+        if (diff !== 0) {
           $rootScope.$broadcast('dayTotalChange', diff, selectedDay);
           Api.logEntry(entry.customer, entry.project, Auth.getEmployee().id, selectedDay, diff).then(() => {
             fetchEntries();
           });
         }
       }
-    }
+    };
 
     function fetchEntries() {
       if (Auth.getEmployee().id) {
@@ -57,13 +57,13 @@ export default function() {
     $scope.$on('dateChanged', (event, date) => {
       selectedDay = date;
       fetchEntries();
-    })
+    });
 
     $scope.$on('projectAppended', (event, project) => {
       var id = project.customer + project.code;
       var exists = false;
       $scope.entries.forEach((entry) => {
-        if (entry.id == id) exists = true;
+        if (entry.id === id) exists = true;
       });
 
       if (!exists) {
@@ -73,19 +73,19 @@ export default function() {
           title: project.title,
           logged: 0,
           hours: 0
-        })
+        });
       } else {
-        console.log("Project already exists");
+        console.log('Project already exists');
       }
-    })
+    });
 
     $scope.$on('userChanged', (user) => {
       fetchEntries();
-    })
-  }
+    });
+  };
 
   return {
     template: require('../views/entries.html'),
     controller: controller
-  }
-}
+  };
+};

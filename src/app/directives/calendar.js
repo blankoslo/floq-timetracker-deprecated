@@ -1,11 +1,10 @@
 import moment from 'moment';
 
-export default function() {
-
+export default () => {
   function buildWeek(start) {
     var weekDays = [];
     var date = start.clone();
-    for (var i = 0; i < 7; i++) {
+    for (let i = 0; i < 7; i++) {
       weekDays.push({
         dayInMonth: date.get('date'),
         nameOfDay: date.format('ddd'),
@@ -28,15 +27,13 @@ export default function() {
         var weekNumber = weekStart.get('week');
 
         return `Uke ${weekNumber}`;
-      }
+      };
 
       $scope.select = (date) => {
         $scope.selected = moment(date);
-      }
+      };
 
-      $scope.isSelected = (date) => {
-        return moment(date).isSame($scope.selected, 'day');
-      }
+      $scope.isSelected = (date) => moment(date).isSame($scope.selected, 'day');
 
       $scope.previous = () => {
         weekStart = weekStart.clone().subtract(1, 'w');
@@ -52,7 +49,7 @@ export default function() {
         $scope.selected = weekStart;
         $scope.weekNumber = weekStart.get('week');
         fetchHoursForWeek();
-      }
+      };
 
       function fetchHoursForWeek() {
         Api.getWeeklyEntries(Auth.getEmployee().id, weekStart.format('YYYY-MM-DD')).then((result) => {
@@ -69,7 +66,7 @@ export default function() {
       function appendTime(date, time) {
         $scope.week.forEach((day) => {
           if (moment(date).isSame(day.date, 'day')) {
-            day.logged = parseInt(day.logged) + time
+            day.logged = parseInt(day.logged) + time;
           }
         });
       }
@@ -97,5 +94,5 @@ export default function() {
 
     },
     template: require('../views/calendar.html')
-  }
-}
+  };
+};

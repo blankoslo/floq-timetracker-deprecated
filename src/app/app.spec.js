@@ -13,15 +13,14 @@ describe('app', () => {
       Auth = {};
       Api = {
         getLoggedInUser: () => {
-          return new Promise((resolve, reject) => {
+          return new Promise((resolve) => {
             setTimeout(() => {
-              resolve("hans");
-            }, 500)
+              resolve('hans');
+            }, 500);
           });
-
         }
       };
-      scope = $rootScope.$new()
+      scope = $rootScope.$new();
       ctrl = $controller('AppCtrl', {
         $scope: scope,
         $rootScope: $rootScope,
@@ -44,4 +43,4 @@ describe('app', () => {
       expect(ctrl.getOverrideUser("/tyme")).toBe('');
     });
   });
-})
+});
