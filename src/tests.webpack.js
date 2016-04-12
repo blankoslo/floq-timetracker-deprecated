@@ -4,5 +4,7 @@
 import 'angular';
 import 'angular-mocks/angular-mocks';
 
+global.componentHandler = false; // needed due to MDL
+
 const testsContext = require.context('.', true, /.spec$/);
 testsContext.keys().forEach(testsContext);
