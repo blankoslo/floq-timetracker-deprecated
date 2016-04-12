@@ -7,6 +7,20 @@ module.exports = {
       filename: "app.bundle.js"
   },
   devtool: 'source-map',
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env':{
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      mangle: false,
+      compress: {
+        warnings: false
+      }
+    })
+  ],
   module: {
       preLoaders: [],
       loaders: [{
