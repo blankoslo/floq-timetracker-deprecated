@@ -1,6 +1,5 @@
 export default class AppCtrl {
   constructor($scope, $rootScope, Auth, Api) {
-
     this.test = 'working';
     $scope.loading = true;
 
@@ -17,12 +16,11 @@ export default class AppCtrl {
         Api.getEmployee(overrideUser).then((result) => {
           Auth.setEmployee(result.data);
           broadcastEmployee();
-        })
+        });
       } else {
         Auth.setEmployee(result.data);
         broadcastEmployee();
       }
-
     }, (result) => {
       console.error(mail + " is not a valid employee");
     });

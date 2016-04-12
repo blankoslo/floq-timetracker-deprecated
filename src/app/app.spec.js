@@ -13,15 +13,14 @@ describe('app', () => {
       Auth = {};
       Api = {
         getLoggedInUser: () => {
-          return new Promise((resolve, reject) => {
+          return new Promise((resolve) => {
             setTimeout(() => {
-              resolve("hans");
-            }, 500)
+              resolve('hans');
+            }, 500);
           });
-
         }
       };
-      myScope = $rootScope.$new()
+      myScope = $rootScope.$new();
       ctrl = $controller('AppCtrl', {
         $scope: myScope,
         $rootScope: $rootScope,
@@ -34,4 +33,4 @@ describe('app', () => {
       expect(myScope.loading).toBe(true);
     });
   });
-})
+});

@@ -1,46 +1,46 @@
-export default function($http) {
+export default ($http) => {
   var apiUrl = config.apiUrl || 'http://localhost:3001';
   return {
 
-    getEmployee: function(mail) {
+    getEmployee(mail) {
       return $http({
         method: 'GET',
-        url: apiUrl + '/employee/' + mail
+        url: `${apiUrl}/employee/${mail}`
       });
     },
 
-    getWeeklyEntries: function(employeeId, date) {
+    getWeeklyEntries(employeeId, date) {
       return $http({
         method: 'GET',
-        url: apiUrl + '/entries/week/' + employeeId + '/' + date
+        url: `${apiUrl}/entries/week/${employeeId}/${date}`
       });
     },
 
-    getLoggedInUser: function() {
+    getLoggedInUser() {
       return $http({
         method: 'GET',
-        url: apiUrl + '/employee'
+        url: `${apiUrl}/employee`
       });
     },
 
-    getProjects: function() {
+    getProjects() {
       return $http({
         method: 'GET',
-        url: apiUrl + '/projects'
+        url: `${apiUrl}/projects`
       });
     },
 
-    getEntries: function(employeeId, date) {
+    getEntries(employeeId, date) {
       return $http({
         method: 'GET',
-        url: apiUrl + '/entries/' + employeeId + '/' + date
+        url: `${apiUrl}/entries/${employeeId}/${date}`
       });
     },
 
-    logEntry: function(customer, project, employeeId, date, minutes) {
+    logEntry(customer, project, employeeId, date, minutes) {
       return $http({
         method: 'POST',
-        url: apiUrl + '/entries/add',
+        url: `${apiUrl}/entries/add`,
         data: {
           customer: customer,
           project: project,
@@ -50,5 +50,5 @@ export default function($http) {
         }
       });
     }
-  }
-}
+  };
+};

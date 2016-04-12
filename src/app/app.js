@@ -1,7 +1,7 @@
 import angular from 'angular';
 import moment from 'moment';
 
-import appCtrl from './controllers/appCtrl.js'
+import appCtrl from './controllers/appCtrl.js';
 import appDirective from './directives/app.js';
 import entriesDirective from './directives/entries.js';
 import calendar from './directives/calendar.js';
@@ -25,15 +25,15 @@ angular.module(MODULE_NAME, [])
   .factory('TokenInterceptor', tokenInterceptor)
   .factory('Auth', authFactory)
   .factory('Api', apiFactory)
-  .config(['$httpProvider', function($httpProvider) {
+  .config(['$httpProvider', ($httpProvider) => {
     $httpProvider.interceptors.push('TokenInterceptor');
   }]);
 
 moment.locale('no', {
-  months: "januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember".split("_"),
-  monthsShort: "jan._feb._mars_apr._mai_juni_juli._aug_sept._okt._nov._des.".split("_"),
-  weekdays: "søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag".split("_"),
-  weekdaysShort: "søn_man_tir_ons_tor_fre_lør".split("_"),
+  months: 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'.split('_'),
+  monthsShort: 'jan._feb._mars_apr._mai_juni_juli._aug_sept._okt._nov._des.'.split('_'),
+  weekdays: 'søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag'.split('_'),
+  weekdaysShort: 'søn_man_tir_ons_tor_fre_lør'.split('_'),
   week: {
     dow: 1,
     doy: 4
@@ -42,14 +42,14 @@ moment.locale('no', {
 
 var config = window.config = window.config || {};
 document.addEventListener('readystatechange', () => {
-  if (document.readyState === "complete") {
-    let appElement = document.createElement("app");
-    let attachTo = document.getElementById("app");
+  if (document.readyState === 'complete') {
+    const appElement = document.createElement('app');
+    const attachTo = document.getElementById('app');
     if (attachTo) {
       attachTo.appendChild(appElement);
     }
-    angular.element(document.getElementById("app")).ready(() => {
-      angular.bootstrap(document.getElementById("app"), [MODULE_NAME]);
+    angular.element(document.getElementById('app')).ready(() => {
+      angular.bootstrap(document.getElementById('app'), [MODULE_NAME]);
     });
   }
 });
