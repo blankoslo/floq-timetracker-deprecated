@@ -1,9 +1,9 @@
 export default class AppCtrl {
   constructor($scope, $rootScope, Auth, Api) {
-    let APPLICATION_ROOT = "timestamp/";
+    let APPLICATION_ROOT = "timestamp";
 
     this.getOverrideUser = (fromPath) => {
-      return fromPath.substring(fromPath.lastIndexOf(APPLICATION_ROOT) + APPLICATION_ROOT.length);
+      return fromPath.substring(fromPath.lastIndexOf(APPLICATION_ROOT) + APPLICATION_ROOT.length).replace(/\//g, '');
     };
 
     $scope.loading = true;
