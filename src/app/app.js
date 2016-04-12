@@ -10,6 +10,7 @@ import apiFactory from './services/api.js';
 import authFactory from './services/auth.js';
 import tokenInterceptor from './services/tokenInterceptor.js';
 import appTopDirective from './directives/app-top.js';
+import focusDirective from './directives/focus.js';
 import notification from './services/notification.js';
 
 import '../style/main.scss';
@@ -23,6 +24,7 @@ angular.module(MODULE_NAME, [])
   .directive('calendar', calendar)
   .directive('appendProject', projectAppender)
   .directive('appTop', appTopDirective)
+  .directive('focus', focusDirective)
   .factory('TokenInterceptor', tokenInterceptor)
   .factory('Notification', notification)
   .factory('Auth', authFactory)
