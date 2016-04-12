@@ -1,7 +1,7 @@
 export default () => {
   var loggedInUser = {};
   var employee = {};
-  var topImage = "url(https://source.unsplash.com/category/nature/800x600)";
+  var topImage = "url(https://source.unsplash.com/category/nature/800x500)";
 
   return {
     setLoggedInUser: (data) => {

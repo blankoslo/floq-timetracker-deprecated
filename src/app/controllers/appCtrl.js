@@ -4,7 +4,7 @@ export default class AppCtrl {
     this.test = 'working';
     $scope.loading = true;
 
-    var overrideUser = window.location.hash.substring(1);
+    var overrideUser; // = window.location.hash.substring(1);
 
     function broadcastEmployee() {
       $rootScope.$broadcast('userChanged', Auth.getEmployee());

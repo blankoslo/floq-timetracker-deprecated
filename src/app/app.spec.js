@@ -1,20 +1,37 @@
 import app from './app';
+import 'babel-polyfill';
 
 describe('app', () => {
-
   describe('AppCtrl', () => {
-    let ctrl;
+    var ctrl;
+    var myScope;
+    var Auth;
+    var Api;
 
-    beforeEach(() => {
-      angular.mock.module(app);
+    beforeEach(angular.mock.module('timestamp'));
+    beforeEach(angular.mock.inject(($controller, $rootScope) => {
+      Auth = {};
+      Api = {
+        getLoggedInUser: () => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve("hans");
+            }, 500)
+          });
 
-      angular.mock.inject(($controller) => {
-        ctrl = $controller('AppCtrl', {});
+        }
+      };
+      myScope = $rootScope.$new()
+      ctrl = $controller('AppCtrl', {
+        $scope: myScope,
+        $rootScope: $rootScope,
+        Auth: Auth,
+        Api: Api
       });
-    });
+    }));
 
-    it('should contain the starter url', () => {
-      expect(ctrl.test).toBe('working');
+    it('should have working test', () => {
+      expect(myScope.loading).toBe(true);
     });
   });
-});
+})

@@ -9,7 +9,6 @@ import projectAppender from './directives/projectAppender.js';
 import apiFactory from './services/api.js';
 import authFactory from './services/auth.js';
 import tokenInterceptor from './services/tokenInterceptor.js';
-import minuteFilter from './filters/minute.js';
 import appTopDirective from './directives/app-top.js';
 
 import '../style/main.scss';
@@ -26,7 +25,6 @@ angular.module(MODULE_NAME, [])
   .factory('TokenInterceptor', tokenInterceptor)
   .factory('Auth', authFactory)
   .factory('Api', apiFactory)
-  .filter('minutes', minuteFilter)
   .config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('TokenInterceptor');
   }]);
@@ -41,13 +39,16 @@ moment.locale('no', {
     doy: 4
   }
 });
-var config = window.config = window.config || {};
-document.addEventListener('readystatechange', function() {
-  if (document.readyState === "complete") {
-    var appElement = document.createElement("app");
-    document.getElementById("app").appendChild(appElement);
 
-    angular.element(document.getElementById("app")).ready(function() {
+var config = window.config = window.config || {};
+document.addEventListener('readystatechange', () => {
+  if (document.readyState === "complete") {
+    let appElement = document.createElement("app");
+    let attachTo = document.getElementById("app");
+    if (attachTo) {
+      attachTo.appendChild(appElement);
+    }
+    angular.element(document.getElementById("app")).ready(() => {
       angular.bootstrap(document.getElementById("app"), [MODULE_NAME]);
     });
   }
