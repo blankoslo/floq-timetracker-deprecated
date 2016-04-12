@@ -8,7 +8,6 @@
     "test": "karma start",
     "lint": "eslint src",
     "test-watch": "karma start --auto-watch --no-single-run",
-    "install": "webpack",
     "postinstall": "webpack --config ./webpack-prod.config.js",
     "start": "node server.js"
   },
