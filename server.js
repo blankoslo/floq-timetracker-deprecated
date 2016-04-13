@@ -1,5 +1,7 @@
-var express = require('express');
-var webpack = require('webpack');
+const express = require('express');
+const webpack = require('webpack');
+
+const port = process.env.PORT || 8080
 
 if (process.env.NODE_ENV === 'production') {
   var app = express();
@@ -7,9 +9,13 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile('dist/js/app.bundle.js', {
       root: __dirname
     });
-  }).listen(process.env.PORT || 8080, function (err) {
+  }).get('/app.bundle.js.map', function (req, res) {
+    res.sendFile('dist/js/app.bundle.js.map', {
+      root: __dirname
+    });
+  }).listen(port, function (err) {
     if (err) { console.log(err) };
-    console.log('Listening at localhost:8080');
+    console.log(`Listening at localhost:${port}`);
   });
 } else  {
   var config = require('./webpack.config');
@@ -19,6 +25,6 @@ if (process.env.NODE_ENV === 'production') {
     hot: true
   }).listen(8080, 'localhost', function (err, result) {
     if (err) { console.log(err) }
-    console.log('Listening at localhost:8080');
+    console.log(`Listening at localhost:${port}`);
   });
 }
