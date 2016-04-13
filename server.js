@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production') {
 
   new WebpackDevServer(webpack(config), {
     hot: true
-  }).listen(8080, 'localhost', function (err, result) {
+  }).listen(port, 'localhost', function (err, result) {
     if (err) { console.log(err) }
     console.log(`Listening at localhost:${port}`);
   });
