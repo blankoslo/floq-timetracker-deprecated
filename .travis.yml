@@ -10,7 +10,9 @@ notifications:
 before_deploy: npm run dist
 deploy:
   provider: heroku
-  app: blank-timestamp
+  app:
+    master: blank-timestamp
+    develop: blank-timestamp-test
   skip_cleanup: true
   api_key:
     secure: CVRMaqX0iyRlsanBENbfShFeKd21Hy8U4REFOfSqt1WHPROBmS662jLWoRqiou2fyYk5hDOhNWAhZPlQu6Fj5ef6gbI6GOosFs2nag8gKICWEbQTg/qDpVwGxSBHWxlECDwWcXeplZwU1FvrEICcpphSrRmcQYUXV/kJgV6hG5+dJVmj1WXhne8DwfDtZEwbhNXsv2lmj3beDCnOqv5OyIfmpyY5ibxtjkwb82i1xKqu7A1Vnw70RWFNAa/z/FnKhoyiybGRp4EJXp63Uq3SSWsybwWAXaMIG4o7LU21Wtfmy+6RrQUFP8CkupVOWaksaQzF9fjmX2MlfhMp760A8NIxrt6ess0DJU7e0IJo6Yp2Xq+Q3carEVYrtUvaa/E2caILDJUSajbUd4jW7SSOHqyl8OxWPOLH2S4YScw7zt23qrOwOijt1yJDDkRtcgzUK7gBi+R+JUhveMlB56MaPX8qmcIZITeUB4RoMPdlTriLmObC+Q7B3bBQ3BPS5z1IhlErLkqpK8cQuUKR73v96PtTruOtUIEBrZ86Pxag2zXIJOxv37kcrdD+LINbGjDIaj+whiK1rE09YduvV8Y5l2oo99Cqlqb1giFCRxdTAWIKYAZzQXjHdesItZ+XACP15hAIGdnaIAfK8Sdl59quCpGt32avD8yNWcY32MiKgRE=
