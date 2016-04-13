@@ -1,6 +1,6 @@
 # Timestamp
 
-[![Build Status](https://travis-ci.org/blankoslo/timestamp.svg?branch=master)](https://travis-ci.org/blankoslo/timestamp)<Paste>
+[![Build Status](https://travis-ci.org/blankoslo/timestamp.svg?branch=develop)](https://travis-ci.org/blankoslo/timestamp)<Paste>
 
 Timetracking for Blank
 
