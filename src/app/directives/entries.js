@@ -88,7 +88,7 @@ export default () => {
           hours: 0
         });
       } else {
-        Notification.error('Prosjekt finnes allereder', 2000);
+        Notification.error('Prosjekt finnes allerede', 2000);
       }
     });
 
