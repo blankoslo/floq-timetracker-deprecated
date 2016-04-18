@@ -1,12 +1,12 @@
 export default ($http) => {
   const config = window.config = window.config || {};
-  const apiUrl = config.apiUrl || 'http://localhost:3001';
+  const apiUri = config.apiUri || 'http://localhost:3001';
   return {
 
     getEmployee(mail) {
       return $http({
         method: 'GET',
-        url: `${apiUrl}/employees?email=ilike.${mail}`,
+        url: `${apiUri}/employees?email=ilike.${mail}`,
         headers: {
           Prefer: 'plurality=singular'
         }
@@ -16,7 +16,7 @@ export default ($http) => {
     getWeeklyEntries(employeeId, date) {
       return $http({
         method: 'POST',
-        url: `${apiUrl}/rpc/entries_sums_for_employee`,
+        url: `${apiUri}/rpc/entries_sums_for_employee`,
         data: {
           employee_id: employeeId,
           start_date: date
@@ -27,7 +27,7 @@ export default ($http) => {
     getLoggedInUser() {
       return $http({
         method: 'GET',
-        url: `${apiUrl}/employees?email=ilike.${window.userEmail}`,
+        url: `${apiUri}/employees?email=ilike.${window.userEmail}`,
         headers: {
           Prefer: 'plurality=singular'
         }
@@ -37,14 +37,14 @@ export default ($http) => {
     getProjects() {
       return $http({
         method: 'GET',
-        url: `${apiUrl}/projects`
+        url: `${apiUri}/projects`
       });
     },
 
     getEntries(employeeId, date) {
       return $http({
         method: 'POST',
-        url: `${apiUrl}/rpc/projects_for_employee_for_date`,
+        url: `${apiUri}/rpc/projects_for_employee_for_date`,
         data: {
           employee_id: employeeId,
           date: date
@@ -55,7 +55,7 @@ export default ($http) => {
     logEntry(customer, project, employeeId, date, minutes, creator) {
       return $http({
         method: 'POST',
-        url: `${apiUrl}/time_entry`,
+        url: `${apiUri}/time_entry`,
         data: {
           customer: customer,
           project: project,
