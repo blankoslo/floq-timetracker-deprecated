@@ -10,9 +10,12 @@ export default () => {
     function fetchEntries() {
       if (Auth.getEmployee().id) {
         Api.getEntries(Auth.getEmployee().id, selectedDay).then((response) => {
-          $scope.entries = response.data[0].projects.map(p =>
-              // synthesize some properties for internal bookkeeping
-              Object.assign({ logged: p.minutes, hours: p.minutes / 60 }, p));
+          const projects = response.data[0].projects;
+          $scope.entries = projects
+                         ? response.data[0].projects.map(p =>
+                             // synthesize some properties for internal bookkeeping
+                             Object.assign({ logged: p.minutes, hours: p.minutes / 60 }, p))
+                         : [];
         });
       }
     }
