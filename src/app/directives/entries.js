@@ -10,7 +10,9 @@ export default () => {
     function fetchEntries() {
       if (Auth.getEmployee().id) {
         Api.getEntries(Auth.getEmployee().id, selectedDay).then((response) => {
-          $scope.entries = response.data;
+          $scope.entries = response.data[0].projects.map(p =>
+              // synthesize some properties for internal bookkeeping
+              Object.assign({ logged: p.minutes, hours: p.minutes / 60 }, p));
         });
       }
     }
@@ -28,10 +30,11 @@ export default () => {
       $rootScope.$broadcast('dayTotalChange', logMinutes, selectedDay);
       Api.logEntry(
           entry.customer,
-          entry.project,
+          entry.code,
           Auth.getEmployee().id,
           selectedDay,
-          logMinutes)
+          logMinutes,
+          Auth.getLoggedInUser().id) // FIXME: should be done by the server
         .then(() => {});
     };
 
@@ -41,9 +44,11 @@ export default () => {
       $rootScope.$broadcast('dayTotalChange', -MINUTE_INCREMENT, selectedDay);
       Api.logEntry(
           entry.customer,
-          entry.project,
+          entry.code,
           Auth.getEmployee().id,
-          selectedDay, -MINUTE_INCREMENT)
+          selectedDay,
+          -MINUTE_INCREMENT,
+          Auth.getLoggedInUser().id)
         .then(() => {});
     };
 
@@ -56,10 +61,11 @@ export default () => {
           $rootScope.$broadcast('dayTotalChange', diff, selectedDay);
           Api.logEntry(
               entry.customer,
-              entry.project,
+              entry.code,
               Auth.getEmployee().id,
               selectedDay,
-              diff)
+              diff,
+              Auth.getLoggedInUser().id)
             .then(() => {
               fetchEntries();
             });
