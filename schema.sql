@@ -1,14 +1,27 @@
-CREATE TABLE time_entry (
-    id integer SERIAL,
-    employee integer NOT NULL REFERENCES employees (id),
-    creator integer NOT NULL REFERENCES employees (id),
-    minutes integer,
-    project integer NOT NULL, -- FIXME: foreign key
-    customer character(3) NOT NULL,
-    comment text,
-    date date NOT NULL,
-    created timestamp without time zone DEFAULT now(),
+create table customers (
+    code character(3) not null,
+    name text
 );
+
+create table projects (
+    customer character(3) not null,
+    code integer not null,
+    title text,
+    billable boolean
+);
+
+create table time_entry (
+    id serial,
+    employee integer not null references employees (id),
+    creator integer not null references employees (id),
+    minutes integer,
+    project integer not null, -- fixme: foreign key
+    customer character(3) not null,
+    comment text,
+    date date not null,
+    created timestamp without time zone default now()
+);
+
 
 -- returns the total number of minutes worked per day from the given start date for `days` days
 drop function if exists entries_sums_for_employee(integer, date, integer);
