@@ -1,4 +1,4 @@
-<ul class="entry-list">
+<ul class="entry-list" ng-hide="loading">
   <li class="list-header">{{selected.format('dddd D MMMM YYYY')}}</li>
   <li ng-repeat="entry in entries">
     <div class="project">
@@ -20,3 +20,4 @@
     </div>
   </li>
 </ul>
+<div ng-show="loading" class="mdl-spinner mdl-js-spinner is-active"></div>

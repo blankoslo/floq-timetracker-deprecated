@@ -12,5 +12,6 @@ export default () => ({
       $scope.$broadcast('projectAppended', project);
       $scope.showDialog = false;
     };
-  }
+  },
+  scope: true
 });

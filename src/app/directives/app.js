@@ -1,5 +1,6 @@
 export default () => ({
   template: require('../views/app.html'),
   controller: 'AppCtrl',
-  controllerAs: 'app'
+  controllerAs: 'app',
+  scope: true
 });

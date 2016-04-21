@@ -19,6 +19,7 @@ export default () => {
   return {
     controller: ($scope, $rootScope, Api, Auth) => {
       let weekStart = moment().startOf('isoweek');
+      $scope.loading = true;
 
       function appendTime(date, time) {
         $scope.week.forEach((day) => {
@@ -35,9 +36,11 @@ export default () => {
       }
 
       function fetchHoursForWeek() {
+        $scope.loading = true;
         Api.getWeeklyEntries(Auth.getEmployee().id, weekStart.format('YYYY-MM-DD'))
           .then((result) => {
             appendWeeklyLog(result.data);
+            $scope.loading = false;
           });
       }
 
@@ -91,6 +94,7 @@ export default () => {
         $rootScope.$broadcast('dateChanged', $scope.selected.format('YYYY-MM-DD'));
       });
     },
-    template: require('../views/calendar.html')
+    template: require('../views/calendar.html'),
+    scope: true
   };
 };

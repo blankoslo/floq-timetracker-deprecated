@@ -6,13 +6,19 @@ export default () => {
 
   const controller = ($scope, $rootScope, Api, Auth) => {
     let selectedDay = moment().format('YYYY-MM-DD');
+    $scope.loading = true;
 
     function fetchEntries() {
+      $scope.loading = true;
       if (Auth.getEmployee().id) {
         Api.getEntries(Auth.getEmployee().id, selectedDay).then((entries) => {
           $scope.entries = entries.data.map(p =>
-              // synthesize some properties for internal bookkeeping
-              Object.assign({ logged: p.minutes, hours: p.minutes / 60 }, p));
+            // synthesize some properties for internal bookkeeping
+            Object.assign({
+              logged: p.minutes,
+              hours: p.minutes / 60
+            }, p));
+          $scope.loading = false;
         });
       }
     }
@@ -46,8 +52,7 @@ export default () => {
           entry.customer,
           entry.code,
           Auth.getEmployee().id,
-          selectedDay,
-          -MINUTE_INCREMENT,
+          selectedDay, -MINUTE_INCREMENT,
           Auth.getLoggedInUser().id)
         .then(() => {});
     };
@@ -105,6 +110,7 @@ export default () => {
 
   return {
     template: require('../views/entries.html'),
-    controller: controller
+    controller: controller,
+    scope: true
   };
 };

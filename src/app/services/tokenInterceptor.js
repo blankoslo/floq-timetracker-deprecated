@@ -1,6 +1,6 @@
 export default () => ({
   request(config) {
-    config.headers['X-Access-Token'] = window.apiToken;
+    config.headers.Authorization = `Bearer ${window.apiToken}`;
     return config;
   }
 });
