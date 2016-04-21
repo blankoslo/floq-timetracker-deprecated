@@ -6,31 +6,21 @@ export default ($http) => {
     getEmployee(mail) {
       return $http({
         method: 'GET',
-        url: `${apiUri}/employees?email=ilike.${mail}`,
-        headers: {
-          Prefer: 'plurality=singular'
-        }
+        url: `${apiUri}/employee/${mail}`
       });
     },
 
     getWeeklyEntries(employeeId, date) {
       return $http({
-        method: 'POST',
-        url: `${apiUri}/rpc/entries_sums_for_employee`,
-        data: {
-          employee_id: employeeId,
-          start_date: date
-        }
+        method: 'GET',
+        url: `${apiUri}/entries/week/${employeeId}/${date}`
       });
     },
 
     getLoggedInUser() {
       return $http({
         method: 'GET',
-        url: `${apiUri}/employees?email=ilike.${window.userEmail}`,
-        headers: {
-          Prefer: 'plurality=singular'
-        }
+        url: `${apiUri}/employee`
       });
     },
 
@@ -43,26 +33,21 @@ export default ($http) => {
 
     getEntries(employeeId, date) {
       return $http({
-        method: 'POST',
-        url: `${apiUri}/rpc/projects_for_employee_for_date`,
-        data: {
-          employee_id: employeeId,
-          date: date
-        }
+        method: 'GET',
+        url: `${apiUri}/entries/${employeeId}/${date}`
       });
     },
 
-    logEntry(customer, project, employeeId, date, minutes, creator) {
+    logEntry(customer, project, employeeId, date, minutes) {
       return $http({
         method: 'POST',
-        url: `${apiUri}/time_entry`,
+        url: `${apiUri}/entries/add`,
         data: {
           customer: customer,
           project: project,
           employee: employeeId,
           date: date,
-          minutes: minutes,
-          creator: creator
+          minutes: minutes
         }
       });
     }

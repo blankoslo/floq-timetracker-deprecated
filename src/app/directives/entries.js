@@ -3,13 +3,16 @@ import moment from 'moment';
 export default () => {
   const MINUTE_INCREMENT = 30;
   const MINUTE_INCREMENT_FIRST_CLICK = 450;
+  const DELAY_BEFORE_LOADING_SPINNER = 200;
 
-  const controller = ($scope, $rootScope, Api, Auth) => {
+  const controller = ($scope, $rootScope, $timeout, Api, Auth) => {
     let selectedDay = moment().format('YYYY-MM-DD');
     $scope.loading = true;
 
     function fetchEntries() {
-      $scope.loading = true;
+      const delayedLoading = $timeout(() => {
+        $scope.loading = true;
+      }, DELAY_BEFORE_LOADING_SPINNER);
       if (Auth.getEmployee().id) {
         Api.getEntries(Auth.getEmployee().id, selectedDay).then((entries) => {
           $scope.entries = entries.data.map(p =>
@@ -18,6 +21,7 @@ export default () => {
               logged: p.minutes,
               hours: p.minutes / 60
             }, p));
+          $timeout.cancel(delayedLoading);
           $scope.loading = false;
         });
       }
