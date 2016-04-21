@@ -30,7 +30,6 @@ angular.module(MODULE_NAME, [])
   .factory('Auth', authFactory)
   .factory('Api', apiFactory)
   .config(['$httpProvider', ($httpProvider) => {
-    // $httpProvider.defaults.headers.common.Authorization = `Bearer ${window.apiToken}`;
     $httpProvider.interceptors.push('TokenInterceptor');
   }]);
 
