@@ -52,6 +52,9 @@ calendar {
         &:not(.empty) {
           color: black;
         }
+        &.loading {
+          opacity: 0;
+        }
       }
       &.selected {
         background-color: $color-pretty-pink;

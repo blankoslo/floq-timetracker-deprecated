@@ -1,38 +1,38 @@
 $dialog-content-height: 30vh;
-
 append-project {
-  display:flex;
+  display: flex;
   justify-content: center;
   .dialog {
     width: 50%;
     position: fixed;
     top: calc(50% - #{$dialog-content-height});
-    left: 0px;
-    right: 0px;
+    left: 0;
+    right: 0;
     margin: auto;
     padding: 1em;
     background: white;
-
+    text-align: center;
+    form {
+      padding: 0 24px;
+    }
     .content {
       height: $dialog-content-height;
       overflow-y: scroll;
     }
-
-    .project-list  {
-      li {
+    .project-list {
+      margin: 0;
+      padding: 0;
+      .project {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-
         &:hover {
           background-color: rgba(158,158,158,.2);
           cursor: pointer;
         }
-
         .project-title {
           color: $color-gray-text;
         }
-
       }
     }
   }

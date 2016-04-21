@@ -14,5 +14,6 @@ export default () => ({
     $scope.goToThisWeek = () => {
       $rootScope.$broadcast('resetCalendar');
     };
-  }
+  },
+  scope: true
 });

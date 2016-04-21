@@ -1,9 +1,11 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const port = process.env.PORT || 8080;
 
 module.exports = {
     entry: [
-        'webpack-dev-server/client?http://localhost:8080',
+        `webpack-dev-server/client?http://localhost:${port}`,
         'webpack/hot/only-dev-server',
         './src/app/app.js'
     ],

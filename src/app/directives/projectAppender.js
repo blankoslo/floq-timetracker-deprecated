@@ -1,6 +1,6 @@
 export default () => ({
   template: require('../views/projectAppender.html'),
-  controller: ($scope, Api) => {
+  controller: ($scope, $rootScope, Api) => {
     $scope.openProjectDialog = () => {
       $scope.showDialog = true;
       Api.getProjects().then((result) => {
@@ -9,8 +9,9 @@ export default () => ({
     };
 
     $scope.appendProject = (project) => {
-      $scope.$broadcast('projectAppended', project);
+      $rootScope.$broadcast('projectAppended', project);
       $scope.showDialog = false;
     };
-  }
+  },
+  scope: true
 });

@@ -1,19 +1,21 @@
 <ul class="entry-list">
-  <li class="list-header">{{selected.format('dddd D MMMM YYYY')}}</li>
+  <li class="list-header">
+    {{header}}
+  </li>
   <li ng-repeat="entry in entries">
     <div class="project">
       <span class="id">{{ entry.customer }} {{ entry.project }}</span>
       <span class="title">{{ entry.title }}</span>
     </div>
     <div class="time">
-      <input type="text" ng-class="{empty: entry.hours == 0}" ng-blur="updateEntry(entry)" ng-model="entry.hours"/>
+      <input ng-disabled="loading" type="text" ng-class="{empty: entry.hours == 0}" ng-blur="updateEntry(entry)" ng-model="entry.hours"/>
     </div>
     <div class="buttons">
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
+        <button ng-disabled="loading" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
           ng-click="logHour(entry)">
             <i class="material-icons">add</i>
         </button>
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
+        <button ng-disabled="loading" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
           ng-click="removeHour(entry)">
             <i class="material-icons">remove</i>
         </button>

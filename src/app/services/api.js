@@ -1,47 +1,47 @@
 export default ($http) => {
   const config = window.config = window.config || {};
-  const apiUrl = config.apiUrl || 'http://localhost:3001';
+  const apiUri = config.apiUri || 'http://localhost:3001';
   return {
 
     getEmployee(mail) {
       return $http({
         method: 'GET',
-        url: `${apiUrl}/employee/${mail}`
+        url: `${apiUri}/employee/${mail}`
       });
     },
 
     getWeeklyEntries(employeeId, date) {
       return $http({
         method: 'GET',
-        url: `${apiUrl}/entries/week/${employeeId}/${date}`
+        url: `${apiUri}/entries/week/${employeeId}/${date}`
       });
     },
 
     getLoggedInUser() {
       return $http({
         method: 'GET',
-        url: `${apiUrl}/employee`
+        url: `${apiUri}/employee`
       });
     },
 
     getProjects() {
       return $http({
         method: 'GET',
-        url: `${apiUrl}/projects`
+        url: `${apiUri}/projects`
       });
     },
 
     getEntries(employeeId, date) {
       return $http({
         method: 'GET',
-        url: `${apiUrl}/entries/${employeeId}/${date}`
+        url: `${apiUri}/entries/${employeeId}/${date}`
       });
     },
 
     logEntry(customer, project, employeeId, date, minutes) {
       return $http({
         method: 'POST',
-        url: `${apiUrl}/entries/add`,
+        url: `${apiUri}/entries/add`,
         data: {
           customer: customer,
           project: project,

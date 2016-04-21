@@ -3,14 +3,26 @@ import moment from 'moment';
 export default () => {
   const MINUTE_INCREMENT = 30;
   const MINUTE_INCREMENT_FIRST_CLICK = 450;
+  const DELAY_BEFORE_LOADING_SPINNER = 200;
 
-  const controller = ($scope, $rootScope, Api, Auth) => {
+  const controller = ($scope, $rootScope, $timeout, Api, Auth) => {
     let selectedDay = moment().format('YYYY-MM-DD');
+    $scope.loading = true;
 
     function fetchEntries() {
+      const delayedLoading = $timeout(() => {
+        $scope.loading = true;
+      }, DELAY_BEFORE_LOADING_SPINNER);
       if (Auth.getEmployee().id) {
-        Api.getEntries(Auth.getEmployee().id, selectedDay).then((response) => {
-          $scope.entries = response.data;
+        Api.getEntries(Auth.getEmployee().id, selectedDay).then((entries) => {
+          $scope.entries = entries.data.map(p =>
+            // synthesize some properties for internal bookkeeping
+            Object.assign({
+              logged: p.minutes,
+              hours: p.minutes / 60
+            }, p));
+          $timeout.cancel(delayedLoading);
+          $scope.loading = false;
         });
       }
     }
@@ -28,10 +40,11 @@ export default () => {
       $rootScope.$broadcast('dayTotalChange', logMinutes, selectedDay);
       Api.logEntry(
           entry.customer,
-          entry.project,
+          entry.code,
           Auth.getEmployee().id,
           selectedDay,
-          logMinutes)
+          logMinutes,
+          Auth.getLoggedInUser().id) // FIXME: should be done by the server
         .then(() => {});
     };
 
@@ -41,9 +54,10 @@ export default () => {
       $rootScope.$broadcast('dayTotalChange', -MINUTE_INCREMENT, selectedDay);
       Api.logEntry(
           entry.customer,
-          entry.project,
+          entry.code,
           Auth.getEmployee().id,
-          selectedDay, -MINUTE_INCREMENT)
+          selectedDay, -MINUTE_INCREMENT,
+          Auth.getLoggedInUser().id)
         .then(() => {});
     };
 
@@ -56,10 +70,11 @@ export default () => {
           $rootScope.$broadcast('dayTotalChange', diff, selectedDay);
           Api.logEntry(
               entry.customer,
-              entry.project,
+              entry.code,
               Auth.getEmployee().id,
               selectedDay,
-              diff)
+              diff,
+              Auth.getLoggedInUser().id)
             .then(() => {
               fetchEntries();
             });
@@ -69,6 +84,7 @@ export default () => {
 
     $scope.$on('dateChanged', (event, date) => {
       selectedDay = date;
+      $scope.header = moment(date).format('dddd D MMMM YYYY');
       fetchEntries();
     });
 
@@ -88,7 +104,7 @@ export default () => {
           hours: 0
         });
       } else {
-        Notification.error('Prosjekt finnes allereder', 2000);
+        Notification.error('Prosjekt finnes allerede', 2000);
       }
     });
 
@@ -99,6 +115,7 @@ export default () => {
 
   return {
     template: require('../views/entries.html'),
-    controller: controller
+    controller: controller,
+    scope: true
   };
 };
