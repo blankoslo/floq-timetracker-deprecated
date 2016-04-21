@@ -12,6 +12,7 @@ notifications:
 before_deploy: npm run dist
 deploy:
   provider: gcs
+  cache_control: "max-age=0"
   bucket:
     master: blank-intranet
     develop: blank-intranet-test
