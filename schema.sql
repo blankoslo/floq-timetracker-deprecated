@@ -22,6 +22,7 @@ create table time_entry (
     created timestamp without time zone default now()
 );
 
+CREATE INDEX time_entry_date_index ON time_entry (date);
 
 -- returns the total number of minutes worked per day from the given start date for `days` days
 drop function if exists entries_sums_for_employee(integer, date, integer);
