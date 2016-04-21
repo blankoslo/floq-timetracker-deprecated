@@ -80,6 +80,7 @@ export default () => {
 
     $scope.$on('dateChanged', (event, date) => {
       selectedDay = date;
+      $scope.header = moment(date).format('dddd D MMMM YYYY');
       fetchEntries();
     });
 
