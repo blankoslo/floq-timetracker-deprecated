@@ -4,12 +4,11 @@
   "description": "Timetracking app",
   "scripts": {
     "build": "rimraf dist && webpack --bail --progress --profile",
-    "server": "webpack-dev-server --history-api-fallback --inline --progress",
     "test": "karma start",
     "lint": "eslint src",
     "test-watch": "karma start --auto-watch --no-single-run",
     "dist": "webpack --config ./webpack-prod.config.js",
-    "start": "node server.js"
+    "start": "webpack-dev-server --history-api-fallback --inline --progress"
   },
   "repository": {
     "type": "git",
