@@ -93,8 +93,7 @@ export default () => {
         $scope.entries.push({
           id: project.id,
           customer: project.customer,
-          project: project.project,
-          title: project.title,
+          name: project.name,
           logged: 0,
           hours: 0
         });
