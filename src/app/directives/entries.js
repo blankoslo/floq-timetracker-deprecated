@@ -28,32 +28,25 @@ export default () => {
     }
 
     $scope.logHour = (entry) => {
+      entry.logged += MINUTE_INCREMENT;
+      entry.hours = entry.logged / 60;
+      $rootScope.$broadcast('dayTotalChange', MINUTE_INCREMENT, selectedDay);
+      Api.logEntry(entry.id, Auth.getEmployee().id, selectedDay, MINUTE_INCREMENT)
+        .then(() => {});
+    };
+
+    $scope.removeHour = (entry) => {
       let logMinutes = 0;
       if (entry.logged === 0) {
         entry.logged = MINUTE_INCREMENT_FIRST_CLICK;
         logMinutes = MINUTE_INCREMENT_FIRST_CLICK;
       } else {
-        logMinutes = MINUTE_INCREMENT;
-        entry.logged += MINUTE_INCREMENT;
+        logMinutes = -MINUTE_INCREMENT;
+        entry.logged -= MINUTE_INCREMENT;
       }
       entry.hours = entry.logged / 60;
       $rootScope.$broadcast('dayTotalChange', logMinutes, selectedDay);
-      Api.logEntry(
-          entry.id,
-          Auth.getEmployee().id,
-          selectedDay,
-          logMinutes)
-        .then(() => {});
-    };
-
-    $scope.removeHour = (entry) => {
-      entry.logged -= MINUTE_INCREMENT;
-      entry.hours = entry.logged / 60;
-      $rootScope.$broadcast('dayTotalChange', -MINUTE_INCREMENT, selectedDay);
-      Api.logEntry(
-          entry.id,
-          Auth.getEmployee().id,
-          selectedDay, -MINUTE_INCREMENT)
+      Api.logEntry(entry.id, Auth.getEmployee().id, selectedDay, logMinutes)
         .then(() => {});
     };
 
