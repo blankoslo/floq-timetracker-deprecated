@@ -1,8 +1,6 @@
-import appCtrl from '../controllers/appCtrl.js';
-
 export default () => ({
   template: require('../views/app.html'),
-  controller: appCtrl,
+  controller: 'AppCtrl',
   controllerAs: 'app',
   scope: true
 });
