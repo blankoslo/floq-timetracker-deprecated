@@ -38,12 +38,11 @@ export default ($http) => {
       });
     },
 
-    logEntry(customer, project, employeeId, date, minutes) {
+    logEntry(project, employeeId, date, minutes) {
       return $http({
         method: 'POST',
         url: `${apiUri}/entries/add`,
         data: {
-          customer: customer,
           project: project,
           employee: employeeId,
           date: date,
