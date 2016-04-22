@@ -1,7 +1,6 @@
 import angular from 'angular';
 import moment from 'moment';
 
-import appCtrl from './controllers/appCtrl.js';
 import appDirective from './directives/app.js';
 import entriesDirective from './directives/entries.js';
 import calendar from './directives/calendar.js';
@@ -18,7 +17,6 @@ import '../style/main.scss';
 const MODULE_NAME = 'timestamp';
 
 angular.module(MODULE_NAME, [])
-  .controller('AppCtrl', appCtrl)
   .directive('app', appDirective)
   .directive('entries', entriesDirective)
   .directive('calendar', calendar)
