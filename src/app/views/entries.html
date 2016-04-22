@@ -5,7 +5,7 @@
   <li ng-repeat="entry in entries">
     <div class="project">
       <span class="customer">{{ entry.customer }}</span>
-      <span class="name">{{ entry.name }}</span>
+      <span class="name">{{ entry.project }}</span>
     </div>
     <div class="time">
       <input ng-disabled="loading" type="text" ng-class="{empty: entry.hours == 0}" ng-blur="updateEntry(entry)" ng-model="entry.hours"/>
