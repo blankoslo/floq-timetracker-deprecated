@@ -1,5 +1,6 @@
 import './app';
 import 'babel-polyfill';
+import appCtrl from './controllers/appCtrl.js';
 
 describe('app', () => {
   describe('AppCtrl', () => {
@@ -20,7 +21,7 @@ describe('app', () => {
           })
       };
       scope = $rootScope.$new();
-      ctrl = $controller('AppCtrl', {
+      ctrl = $controller(appCtrl, {
         $scope: scope,
         $rootScope: $rootScope,
         Auth: Auth,
