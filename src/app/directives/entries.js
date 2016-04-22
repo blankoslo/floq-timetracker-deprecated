@@ -5,7 +5,7 @@ export default () => {
   const MINUTE_INCREMENT_FIRST_CLICK = 450;
   const DELAY_BEFORE_LOADING_SPINNER = 200;
 
-  const controller = ($scope, $rootScope, $timeout, Api, Auth) => {
+  const controller = ($scope, $rootScope, $timeout, Api, Auth, Notification) => {
     let selectedDay = moment().format('YYYY-MM-DD');
     $scope.loading = true;
 
@@ -39,12 +39,10 @@ export default () => {
       entry.hours = entry.logged / 60;
       $rootScope.$broadcast('dayTotalChange', logMinutes, selectedDay);
       Api.logEntry(
-          entry.customer,
-          entry.code,
+          entry.id,
           Auth.getEmployee().id,
           selectedDay,
-          logMinutes,
-          Auth.getLoggedInUser().id) // FIXME: should be done by the server
+          logMinutes)
         .then(() => {});
     };
 
@@ -53,11 +51,9 @@ export default () => {
       entry.hours = entry.logged / 60;
       $rootScope.$broadcast('dayTotalChange', -MINUTE_INCREMENT, selectedDay);
       Api.logEntry(
-          entry.customer,
-          entry.code,
+          entry.id,
           Auth.getEmployee().id,
-          selectedDay, -MINUTE_INCREMENT,
-          Auth.getLoggedInUser().id)
+          selectedDay, -MINUTE_INCREMENT)
         .then(() => {});
     };
 
@@ -69,12 +65,10 @@ export default () => {
         if (diff !== 0) {
           $rootScope.$broadcast('dayTotalChange', diff, selectedDay);
           Api.logEntry(
-              entry.customer,
-              entry.code,
+              entry.id,
               Auth.getEmployee().id,
               selectedDay,
-              diff,
-              Auth.getLoggedInUser().id)
+              diff)
             .then(() => {
               fetchEntries();
             });
@@ -89,7 +83,7 @@ export default () => {
     });
 
     $scope.$on('projectAppended', (event, project) => {
-      const id = project.customer + project.code;
+      const id = project.id;
       let exists = false;
       $scope.entries.forEach((entry) => {
         if (entry.id === id) exists = true;
@@ -97,8 +91,9 @@ export default () => {
 
       if (!exists) {
         $scope.entries.push({
+          id: project.id,
           customer: project.customer,
-          project: project.code,
+          project: project.project,
           title: project.title,
           logged: 0,
           hours: 0

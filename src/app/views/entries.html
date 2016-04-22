@@ -4,8 +4,8 @@
   </li>
   <li ng-repeat="entry in entries">
     <div class="project">
-      <span class="id">{{ entry.customer }} {{ entry.project }}</span>
-      <span class="title">{{ entry.title }}</span>
+      <span class="id">{{ entry.customer }}</span>
+      <span class="title">{{ entry.project }}</span>
     </div>
     <div class="time">
       <input ng-disabled="loading" type="text" ng-class="{empty: entry.hours == 0}" ng-blur="updateEntry(entry)" ng-model="entry.hours"/>
