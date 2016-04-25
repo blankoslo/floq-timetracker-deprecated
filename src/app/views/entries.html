@@ -8,7 +8,10 @@
       <span class="name">{{ entry.project }}</span>
     </div>
     <div class="time">
-      <input ng-disabled="loading" type="text" ng-class="{empty: entry.hours == 0}" ng-blur="updateEntry(entry)" ng-model="entry.hours"/>
+      <form ng-submit="updateEntry(entry)">
+        <input ng-disabled="loading" type="text" ng-class="{empty: entry.hours == 0}" ng-blur="updateEntry(entry)" ng-model="entry.hours"/>
+        <input type="submit" style="display: none;"/>
+      </form>
     </div>
     <div class="buttons">
         <button ng-disabled="loading" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
