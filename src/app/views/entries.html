@@ -11,14 +11,15 @@
       </form>
     </div>
     <div class="buttons">
-        <button ng-disabled="loading" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
           ng-click="logHour(entry)">
             <i class="material-icons">add</i>
         </button>
-        <button ng-disabled="loading" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
           ng-click="removeHour(entry)">
             <i class="material-icons">remove</i>
         </button>
     </div>
   </li>
 </ul>
+<div ng-show="loading" class="mdl-spinner mdl-js-spinner is-active"></div>

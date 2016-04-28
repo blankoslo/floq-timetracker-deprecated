@@ -6,21 +6,31 @@ export default ($http) => {
     getEmployee(mail) {
       return $http({
         method: 'GET',
-        url: `${apiUri}/employee/${mail}`
+        url: `${apiUri}/employees?email=ilike.${mail}`,
+        headers: {
+          Prefer: 'plurality=singular'
+        }
       });
     },
 
     getWeeklyEntries(employeeId, date) {
       return $http({
-        method: 'GET',
-        url: `${apiUri}/entries/week/${employeeId}/${date}`
+        method: 'POST',
+        url: `${apiUri}/rpc/entries_sums_for_employee`,
+        data: {
+          employee_id: employeeId,
+          start_date: date
+        }
       });
     },
 
     getLoggedInUser() {
       return $http({
         method: 'GET',
-        url: `${apiUri}/employee`
+        url: `${apiUri}/employees?email=ilike.${window.userEmail}`,
+        headers: {
+          Prefer: 'plurality=singular'
+        }
       });
     },
 
@@ -33,20 +43,25 @@ export default ($http) => {
 
     getEntries(employeeId, date) {
       return $http({
-        method: 'GET',
-        url: `${apiUri}/entries/${employeeId}/${date}`
+        method: 'POST',
+        url: `${apiUri}/rpc/projects_for_employee_for_date`,
+        data: {
+          employee_id: employeeId,
+          date: date
+        }
       });
     },
 
     logEntry(project, employeeId, date, minutes) {
       return $http({
         method: 'POST',
-        url: `${apiUri}/entries/add`,
+        url: `${apiUri}/time_entry`,
         data: {
           project: project,
           employee: employeeId,
           date: date,
-          minutes: minutes
+          minutes: minutes,
+          creator: employeeId // FIXME: this should be the logged-in user
         }
       });
     }
