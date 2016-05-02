@@ -33,16 +33,16 @@ export default class CalendarCtrl {
 
     $scope.displayWeek = () => {
       const weekNumber = weekStart.get('week');
-        const weekEnd = weekStart.clone().add(6, 'day');
-        const dateStr = () => {
-            if (weekStart.month() === weekEnd.month()) {
-                return `${weekStart.format('D')}. – ${weekEnd.format('D')}. ${weekEnd.format('MMMM')}`;
-            }
-            return `${weekStart.format('D')}.
+      const weekEnd = weekStart.clone().add(6, 'day');
+      const dateStr = () => {
+        if (weekStart.month() === weekEnd.month()) {
+          return `${weekStart.format('D')}. – ${weekEnd.format('D')}. ${weekEnd.format('MMMM')}`;
+        }
+        return `${weekStart.format('D')}.
                     ${weekStart.format('MMM')} –
                     ${weekEnd.format('D')}.
                     ${weekEnd.format('MMM')}`;
-        };
+      };
 
       return `${dateStr()} Uke ${weekNumber}`;
     };
