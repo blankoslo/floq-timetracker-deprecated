@@ -2,6 +2,8 @@ $dialog-content-height: 30vh;
 append-project {
   display: flex;
   justify-content: center;
+    padding: 35px;
+
   .dialog {
     width: 50%;
     position: fixed;
