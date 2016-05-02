@@ -35,12 +35,14 @@ export default class CalendarCtrl {
       const weekNumber = weekStart.get('week');
         const weekEnd = weekStart.clone().add(6, 'day');
         const dateStr = () => {
-            if (weekStart.month() == weekEnd.month()) {
+            if (weekStart.month() === weekEnd.month()) {
                 return `${weekStart.format('D')}. – ${weekEnd.format('D')}. ${weekEnd.format('MMMM')}`;
-            } else {
-                return `${weekStart.format('D')}. ${weekStart.format('MMM')} – ${weekEnd.format('D')}. ${weekEnd.format('MMM')}`;
             }
-        }
+            return `${weekStart.format('D')}.
+                    ${weekStart.format('MMM')} –
+                    ${weekEnd.format('D')}.
+                    ${weekEnd.format('MMM')}`;
+        };
 
       return `${dateStr()} Uke ${weekNumber}`;
     };
