@@ -36,7 +36,7 @@ export default class CalendarCtrl {
       const weekEnd = weekStart.clone().add(6, 'day');
       const dateStr = () => {
         if (weekStart.month() === weekEnd.month()) {
-          return `${weekStart.format('D')}. – ${weekEnd.format('D')}. ${weekEnd.format('MMMM')}`;
+          return `${weekStart.format('D')}.–${weekEnd.format('D')}. ${weekEnd.format('MMMM')}`;
         }
         return `${weekStart.format('D')}.
                     ${weekStart.format('MMM')} –
@@ -44,7 +44,7 @@ export default class CalendarCtrl {
                     ${weekEnd.format('MMM')}`;
       };
 
-      return `${dateStr()} Uke ${weekNumber}`;
+      return `${dateStr()} (uke ${weekNumber})`;
     };
 
     $scope.select = (date) => {
