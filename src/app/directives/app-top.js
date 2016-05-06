@@ -11,6 +11,14 @@ export default () => ({
       $scope.month = moment(date).format('MMMM YYYY');
     });
 
+    $scope.$on('totalWeeklyHours', (event, hours) => {
+      $scope.hours = hours;
+    });
+
+    $scope.$on('entryUpdated', (event, day, diff) => {
+      $scope.hours += diff;
+    });
+
     $scope.goToThisWeek = () => {
       $rootScope.$broadcast('resetCalendar');
     };
