@@ -1,11 +1,18 @@
 <div class="calendar">
-    <h3 class="header">{{ displayWeek() }}</h3>
+    <h3 class="header">
+      <div ng-click="previous()">
+          <button class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons">arrow_back</i>
+          </button>
+      </div>
+      <span class="title">{{ displayWeek() }}</span>
+      <div ng-click="next()">
+        <button class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">arrow_forward</i>
+        </button>
+      </li>
+    </h3>
     <ul class="week">
-        <li ng-click="previous()">
-            <button class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">arrow_back</i>
-            </button>
-        </li>
         <li class="day"
         ng-repeat="day in week"
         ng-click="select(day.date)"
@@ -14,11 +21,6 @@
             <span class="dayInMonth" ng-class="{sunday: $index == 6}">{{day.dayInMonth}}</span>
             <span class="nameOfDay">{{day.nameOfDay}}</span>
             <span class="logged" ng-class="{empty: day.logged == 0, loading: loading}">{{day.logged / 60}}</span>
-        </li>
-        <li ng-click="next()">
-          <button class="mdl-button mdl-js-button mdl-button--icon">
-              <i class="material-icons">arrow_forward</i>
-          </button>
         </li>
     </ul>
 </div>

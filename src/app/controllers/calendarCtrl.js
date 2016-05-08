@@ -24,6 +24,11 @@ export default class CalendarCtrl {
       Api.getWeeklyEntries(Auth.getEmployee().id, weekStart.format('YYYY-MM-DD'))
         .then((result) => {
           appendWeeklyLog(result.data);
+          let totalWeeklyHours = 0;
+          result.data.forEach((e) => {
+            totalWeeklyHours += (e.sum / 60);
+          });
+          $rootScope.$broadcast('totalWeeklyHours', totalWeeklyHours);
           $scope.loading = false;
         });
     }
@@ -33,8 +38,18 @@ export default class CalendarCtrl {
 
     $scope.displayWeek = () => {
       const weekNumber = weekStart.get('week');
+      const weekEnd = weekStart.clone().add(6, 'day');
+      const dateStr = () => {
+        if (weekStart.month() === weekEnd.month()) {
+          return `${weekStart.format('D')}.–${weekEnd.format('D')}. ${weekEnd.format('MMMM')}`;
+        }
+        return `${weekStart.format('D')}.
+                    ${weekStart.format('MMM')} –
+                    ${weekEnd.format('D')}.
+                    ${weekEnd.format('MMM')}`;
+      };
 
-      return `Uke ${weekNumber}`;
+      return `${dateStr()} (uke ${weekNumber})`;
     };
 
     $scope.select = (date) => {
@@ -63,7 +78,7 @@ export default class CalendarCtrl {
       fetchHoursForWeek();
     });
 
-    $scope.$on('dayTotalChange', (event, minutes, day) => {
+    $scope.$on('entryUpdated', (event, minutes, day) => {
       appendTime(day, minutes);
     });
 

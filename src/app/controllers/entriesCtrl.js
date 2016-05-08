@@ -53,7 +53,7 @@ export default class EntriesCtrl {
         const logged = entry.logged;
         const diff = input - logged;
         if (diff !== 0) {
-          $rootScope.$broadcast('dayTotalChange', diff, selectedDay);
+          $rootScope.$broadcast('entryUpdated', diff, selectedDay);
           Api.logEntry(
               entry.id,
               Auth.getEmployee().id,
@@ -68,7 +68,6 @@ export default class EntriesCtrl {
 
     $scope.$on('dateChanged', (event, date) => {
       selectedDay = date;
-      $scope.header = moment(date).format('dddd D MMMM YYYY');
       fetchEntries();
     });
 

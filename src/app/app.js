@@ -46,7 +46,7 @@ moment.locale('no', {
     'november',
     'desember'
   ],
-  monthsShort: 'jan._feb._mars_apr._mai_juni_juli._aug_sept._okt._nov._des.'.split('_'),
+  monthsShort: 'jan_feb_mars_apr_mai_juni_juli_aug_sept_okt_nov_des'.split('_'),
   weekdays: 'søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag'.split('_'),
   weekdaysShort: 'søn_man_tir_ons_tor_fre_lør'.split('_'),
   week: {

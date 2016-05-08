@@ -5,6 +5,13 @@ calendar {
     text-align: center;
     margin: 0;
     text-transform: uppercase;
+    display: flex;
+      justify-content: space-between;
+      align-items: center;
+      button {
+        margin: 10px;
+        color: $color-gray-text;
+      }
     .week {
       margin-right: 10px;
     }
@@ -18,10 +25,6 @@ calendar {
     margin-bottom: 10px;
     li {
       cursor: pointer;
-      button {
-        margin: 10px;
-        color: $color-gray-text;
-      }
       &:hover {
         color: gray;
       }
