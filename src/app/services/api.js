@@ -37,7 +37,7 @@ export default ($http) => {
     getProjects() {
       return $http({
         method: 'GET',
-        url: `${apiUri}/projects`
+        url: `${apiUri}/projects?select=id,name,customer{id,name}`
       });
     },
 
