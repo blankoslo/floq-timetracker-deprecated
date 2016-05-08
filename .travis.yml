@@ -6,20 +6,35 @@ node_js:
 script:
   - npm run lint
   - npm test
+
 notifications:
   slack:
     secure: c05HSfj0UjBRifsmveJsMb97o6gHcAxeu/zvOI2GTTQNUzCXyRrogjcKr4NXBl3tCsCRXLo8ObgnmEbKTXyT6b7ksvvK1+jM0jgXCNDzEoKqEGThoEydKG8jhqsPmBrAQuHDL6WA6UHJtIQBLZXr4BWOZvLt3S+UoOGxK5NolHwjqtNohxxScQZNmAxbAF7n0TzGO+vtH6gTYTJAcMuRs+bFJ1DqQzi0KYYZzWAZEOsXUCkHBhWlSg56z49i9LYCeJQID/yiQCf8Q4NCKzxRS7qo2wsxl+A5EALZdmum+w1bYI6OLT8sp4f6sGqGMUJmmFj7CSrQWzXXHNn7dGx4kBkxgmGnQEMJIR0glkZ2mokQz/UPoY+vuvfg0tI+ZPUdIsMPi9Jl1jV9MFsqOrFdQTBQOVcEu74ZYtdVOkc4q1niapWwlkL9Zxv6vkntQ5ZvLea0yWPuRazvESeasBrau3Fjo6mx3AAnSubA/hUY2TQIhBqQXtvYN+JDUXRY9oh/b9eIt20HUqZhUB6Mvexgxiu/WkIPnIhCO/KTtATrUdwVzlI5IrCKx4a29jmsKCxROK16h4NDVPsD0F6jbSurio7ATLGcg+wec+3Ap5mrVD1WKzvcOGKuqfv0CcYjWSy54qmteglhL6pInh9C0ovXnXzpyBt1AJFGhupyUIchfP8=
+
 before_deploy: npm run dist
+
 deploy:
-  provider: gcs
-  cache_control: "max-age=0"
-  bucket:
-    master: blank-intranet
-    develop: blank-intranet-test
-  local_dir: dist
-  upload-dir: timestamp
-  acl: public-read
-  access_key_id: GOOGWV2PTK7CTMU7EUNF
-  secret_access_key:
-    secure: LN83uRtY+sG9DyCHtgnqS6TS8sUa5iofBdhDTN956AI2zB5j/nL2FtGC8nhK2h1XlC/C5hsIsB0lAfj8HO9Ro43EK5tdhAHoRPSDK13mT+aEiHS77YFiLgoGXJ8mSXgajQVWkpkj7U9tMUoQbu3cXZjsRH8XtihFlobeNjVk4+k90y4nYxN0OfD5xCjEEUWNz0K1xeyjrMBWmQkwEtF/gPKUVOxhJ2q1V6fmEdBJ/xLVjrpyhUsl4XxKxh9sju9VvzAXVHXhCZPsPSbwQwDpRGOwcQQQtGyrk72WZFsFCqGp5KhEfu/8S8ysaP0XYZfmlIEnxjZiTS5m/hmiA2kvQeJuZALZxf2lWFZKxXM/BPWbDAnzOxAArcNPFoWyg+9B+8d843U6WTfDqyBVdXMkMln1XT+BKO6hu+B6RX7/5TmqVGK9LC0O6xb9tZkpKFdoILuqAe7JutR6mSH9beXvtjbI3ruzD0Kk06Br7S9CswRMgJp7CdibfIBnuGg18PKDR+Oi9rrnQRA13MNDp7+FqhjjimMimhknzmcM96GlaSC14p5+s+lWgnH4H3VLWkeP/x5d69YoL8y3ARPzPkDQu1auTvxsvNtTcCrl38ULuRR/AjdZsi8n0ZazMOpki26LMTsW9COhYYbkLk3jLps1xxJK9AHOM1I/ahIuyV5W2Ys=
-  skip_cleanup: true
+  - provider: gcs
+    cache_control: "max-age=0"
+    bucket: blank-intranet-test
+    local_dir: dist
+    upload-dir: timestamp
+    acl: public-read
+    access_key_id: GOOGWV2PTK7CTMU7EUNF
+    secret_access_key:
+      secure: LN83uRtY+sG9DyCHtgnqS6TS8sUa5iofBdhDTN956AI2zB5j/nL2FtGC8nhK2h1XlC/C5hsIsB0lAfj8HO9Ro43EK5tdhAHoRPSDK13mT+aEiHS77YFiLgoGXJ8mSXgajQVWkpkj7U9tMUoQbu3cXZjsRH8XtihFlobeNjVk4+k90y4nYxN0OfD5xCjEEUWNz0K1xeyjrMBWmQkwEtF/gPKUVOxhJ2q1V6fmEdBJ/xLVjrpyhUsl4XxKxh9sju9VvzAXVHXhCZPsPSbwQwDpRGOwcQQQtGyrk72WZFsFCqGp5KhEfu/8S8ysaP0XYZfmlIEnxjZiTS5m/hmiA2kvQeJuZALZxf2lWFZKxXM/BPWbDAnzOxAArcNPFoWyg+9B+8d843U6WTfDqyBVdXMkMln1XT+BKO6hu+B6RX7/5TmqVGK9LC0O6xb9tZkpKFdoILuqAe7JutR6mSH9beXvtjbI3ruzD0Kk06Br7S9CswRMgJp7CdibfIBnuGg18PKDR+Oi9rrnQRA13MNDp7+FqhjjimMimhknzmcM96GlaSC14p5+s+lWgnH4H3VLWkeP/x5d69YoL8y3ARPzPkDQu1auTvxsvNtTcCrl38ULuRR/AjdZsi8n0ZazMOpki26LMTsW9COhYYbkLk3jLps1xxJK9AHOM1I/ahIuyV5W2Ys=
+    skip_cleanup: true
+    on:
+      branch: develop
+  - provider: gcs
+    cache_control: "max-age=3600"
+    bucket: blank-intranet
+    local_dir: dist
+    upload-dir: timestamp
+    acl: public-read
+    access_key_id: GOOGWV2PTK7CTMU7EUNF
+    secret_access_key:
+      secure: LN83uRtY+sG9DyCHtgnqS6TS8sUa5iofBdhDTN956AI2zB5j/nL2FtGC8nhK2h1XlC/C5hsIsB0lAfj8HO9Ro43EK5tdhAHoRPSDK13mT+aEiHS77YFiLgoGXJ8mSXgajQVWkpkj7U9tMUoQbu3cXZjsRH8XtihFlobeNjVk4+k90y4nYxN0OfD5xCjEEUWNz0K1xeyjrMBWmQkwEtF/gPKUVOxhJ2q1V6fmEdBJ/xLVjrpyhUsl4XxKxh9sju9VvzAXVHXhCZPsPSbwQwDpRGOwcQQQtGyrk72WZFsFCqGp5KhEfu/8S8ysaP0XYZfmlIEnxjZiTS5m/hmiA2kvQeJuZALZxf2lWFZKxXM/BPWbDAnzOxAArcNPFoWyg+9B+8d843U6WTfDqyBVdXMkMln1XT+BKO6hu+B6RX7/5TmqVGK9LC0O6xb9tZkpKFdoILuqAe7JutR6mSH9beXvtjbI3ruzD0Kk06Br7S9CswRMgJp7CdibfIBnuGg18PKDR+Oi9rrnQRA13MNDp7+FqhjjimMimhknzmcM96GlaSC14p5+s+lWgnH4H3VLWkeP/x5d69YoL8y3ARPzPkDQu1auTvxsvNtTcCrl38ULuRR/AjdZsi8n0ZazMOpki26LMTsW9COhYYbkLk3jLps1xxJK9AHOM1I/ahIuyV5W2Ys=
+    skip_cleanup: true
+    on:
+      branch: master
