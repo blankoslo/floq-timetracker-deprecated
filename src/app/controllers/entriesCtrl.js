@@ -79,7 +79,6 @@ export default class EntriesCtrl {
       });
 
       if (!exists) {
-        console.log('project', project);
         $scope.entries.push({
           id: project.id,
           customer: project.customer.name,
