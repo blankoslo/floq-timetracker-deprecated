@@ -81,7 +81,7 @@ export default class EntriesCtrl {
       if (!exists) {
         $scope.entries.push({
           id: project.id,
-          customer: project.customer,
+          customer: project.customer.name,
           project: project.name,
           logged: 0,
           hours: 0

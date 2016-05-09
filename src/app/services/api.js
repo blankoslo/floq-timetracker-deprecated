@@ -6,7 +6,7 @@ export default ($http) => {
     getEmployee(mail) {
       return $http({
         method: 'GET',
-        url: `${apiUri}/employees?email=ilike.${mail}`,
+        url: `${apiUri}/employees?email=ilike.*${mail}*`,
         headers: {
           Prefer: 'plurality=singular'
         }
