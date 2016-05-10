@@ -15,8 +15,8 @@ export default () => ({
       $scope.hours = hours;
     });
 
-    $scope.$on('entryUpdated', (event, day, diff) => {
-      $scope.hours += diff;
+    $scope.$on('entryUpdated', (event, diff) => {
+      $scope.hours += diff / 60;
     });
 
     $scope.goToThisWeek = () => {
