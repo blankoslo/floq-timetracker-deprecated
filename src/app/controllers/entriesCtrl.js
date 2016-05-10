@@ -25,7 +25,7 @@ export default class EntriesCtrl {
       const change = this.calculateChange(entry.logged, true);
       entry.logged = change.logged;
       entry.hours = change.hours;
-      $rootScope.$broadcast('dayTotalChange', change.change, selectedDay);
+      $rootScope.$broadcast('entryUpdated', change.change, selectedDay);
       Api.logEntry(
           entry.id,
           Auth.getEmployee().id,
@@ -38,7 +38,7 @@ export default class EntriesCtrl {
       const change = this.calculateChange(entry.logged, false);
       entry.logged = change.logged;
       entry.hours = change.hours;
-      $rootScope.$broadcast('dayTotalChange', change.change, selectedDay);
+      $rootScope.$broadcast('entryUpdated', change.change, selectedDay);
       Api.logEntry(
           entry.id,
           Auth.getEmployee().id,
