@@ -15,7 +15,7 @@ export default () => ({
       $scope.hours = hours;
     });
 
-    $scope.$on('entryUpdated', (event, day, diff) => {
+    $scope.$on('entryUpdated', (event, diff, day) => {
       $scope.hours += diff;
     });
 
