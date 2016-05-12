@@ -37,22 +37,8 @@ export default ($http) => {
     getProjects() {
       return $http({
         method: 'GET',
-        url: `${apiUri}/projects?select=id,name,customer{id,name}&order=name`
-      })
-      // sort the returned list of projects by customer name
-      // FIXME: this should be handled by the API: https://github.com/begriffs/postgrest/issues/509
-          .then(result => {
-            result.data
-            .sort((p1, p2) => {
-              if (p1.customer.name.toLowerCase() === p2.customer.name.toLowerCase()) {
-                return 0;
-              }
-
-              return p1.customer.name.toLowerCase() < p2.customer.name.toLowerCase() ? -1 : 1;
-            });
-
-            return result;
-          });
+        url: `${apiUri}/projects?select=id,name,customer{id,name}`
+      });
     },
 
     getEntries(employeeId, date) {
