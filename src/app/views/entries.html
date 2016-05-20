@@ -1,25 +1,23 @@
 <ul class="entry-list">
-  <li ng-repeat="entry in entries">
-    <div class="project">
-      <span class="customer">{{ entry.customer }}</span>
-      <span class="name">{{ entry.project }}</span>
-    </div>
-    <div class="time">
-      <form ng-submit="updateEntry(entry)">
-        <input ng-disabled="loading" type="text" ng-class="{empty: entry.hours == 0}" ng-blur="updateEntry(entry)" ng-model="entry.hours"/>
-        <input type="submit" style="display: none;"/>
-      </form>
-    </div>
-    <div class="buttons">
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
-          ng-click="logHour(entry)">
-            <i class="material-icons">add</i>
-        </button>
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
-          ng-click="removeHour(entry)">
-            <i class="material-icons">remove</i>
-        </button>
-    </div>
-  </li>
+    <li ng-repeat="entry in entries | orderBy:['customer', 'project']">
+        <div class="project">
+            <span class="customer">{{ entry.customer }}</span>
+            <span class="name">{{ entry.project }}</span>
+        </div>
+        <div class="time">
+            <form ng-submit="updateEntry(entry)">
+                <input ng-disabled="loading" type="text" ng-class="{empty: entry.hours == 0}" ng-blur="updateEntry(entry)" ng-model="entry.hours" />
+                <input type="submit" style="display: none;" />
+            </form>
+        </div>
+        <div class="buttons">
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" ng-click="logHour(entry)">
+                <i class="material-icons">add</i>
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" ng-click="removeHour(entry)">
+                <i class="material-icons">remove</i>
+            </button>
+        </div>
+    </li>
 </ul>
 <div ng-show="loading" class="mdl-spinner mdl-js-spinner is-active"></div>
