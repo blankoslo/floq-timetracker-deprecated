@@ -12,7 +12,11 @@
 </form>
   <div class="mdl-dialog__content content">
     <ul class="project-list mdl-list">
-      <li class="mdl-list__item project" ng-repeat="project in projects | filter:filterProjects " ng-click="appendProject(project)">
+        <li
+          class="mdl-list__item project"
+          ng-repeat="project in projects | filter:filterProjects | orderBy:['customer.name', 'name']"
+          ng-click="appendProject(project)"
+        >
           <span class="project-data">{{project.customer.name}}</span>
           <span class="project-title">{{project.name}}</span>
       </li>

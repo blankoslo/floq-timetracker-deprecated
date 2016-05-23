@@ -8,7 +8,7 @@
     "lint": "eslint src",
     "test-watch": "karma start --auto-watch --no-single-run",
     "dist": "webpack --config ./webpack-prod.config.js",
-    "start": "webpack-dev-server --history-api-fallback --inline --progress"
+    "start": "webpack-dev-server --history-api-fallback --inline --progress --port 8082"
   },
   "repository": {
     "type": "git",
