@@ -1,5 +1,6 @@
 import angular from 'angular';
 import moment from 'moment';
+import ngTouch from 'angular-touch';
 
 import appDirective from './directives/app.js';
 import entriesDirective from './directives/entries.js';
@@ -16,7 +17,7 @@ import '../style/main.scss';
 
 const MODULE_NAME = 'timestamp';
 
-angular.module(MODULE_NAME, [])
+angular.module(MODULE_NAME, [ngTouch])
   .directive('app', appDirective)
   .directive('entries', entriesDirective)
   .directive('calendar', calendar)
