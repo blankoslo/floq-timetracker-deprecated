@@ -1,4 +1,4 @@
-<div class="calendar">
+<div class="calendar" ng-swipe-left="next()" ng-swipe-right="previous()">
     <h3 class="header">
       <div ng-click="previous()">
           <button class="mdl-button mdl-js-button mdl-button--icon">
@@ -13,11 +13,7 @@
       </li>
     </h3>
     <ul class="week">
-        <li class="day"
-        ng-repeat="day in week"
-        ng-click="select(day.date)"
-        title="{{day.date}}"
-        ng-class="{selected: isSelected(day.date)}">
+        <li class="day" ng-repeat="day in week" ng-click="select(day.date)" title="{{day.date}}" ng-class="{selected: isSelected(day.date)}">
             <span class="dayInMonth" ng-class="{sunday: $index == 6}">{{day.dayInMonth}}</span>
             <span class="nameOfDay">{{day.nameOfDay}}</span>
             <span class="logged" ng-class="{empty: day.logged == 0, loading: loading}">{{day.logged / 60}}</span>

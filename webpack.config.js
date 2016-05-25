@@ -10,8 +10,8 @@ module.exports = {
     './src/app/app.js'
   ],
   output: {
-    path: __dirname + "/dist/js",
-    filename: "app.bundle.js"
+    path: `${__dirname} /dist/js`,
+    filename: 'app.bundle.js'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -32,7 +32,7 @@ module.exports = {
       exclude: /node_modules/
     }, {
       test: /\.scss$/,
-      loaders: ["style", "css", "sass"]
+      loaders: ['style', 'css', 'sass']
     }, {
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
       loader: 'file'
