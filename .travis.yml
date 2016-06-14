@@ -16,9 +16,9 @@ before_deploy: npm run dist
 deploy:
   - provider: gcs
     cache_control: "max-age=0"
-    bucket: blank-intranet-test
+    bucket: floq-test
     local_dir: dist
-    upload-dir: timestamp
+    upload-dir: timetracker
     acl: public-read
     access_key_id: GOOGWV2PTK7CTMU7EUNF
     secret_access_key:
@@ -28,9 +28,9 @@ deploy:
       branch: develop
   - provider: gcs
     cache_control: "max-age=3600"
-    bucket: blank-intranet
+    bucket: floq
     local_dir: dist
-    upload-dir: timestamp
+    upload-dir: timetracker
     acl: public-read
     access_key_id: GOOGWV2PTK7CTMU7EUNF
     secret_access_key:
