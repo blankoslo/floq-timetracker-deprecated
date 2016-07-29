@@ -41,6 +41,13 @@ export default ($http) => {
       });
     },
 
+    getHolidays(fromDate, toDate) {
+      return $http({
+        method: 'GET',
+        url: `${apiUri}/holidays?date=gte.${fromDate}&date=lte.${toDate}`
+      });
+    },
+
     getEntries(employeeId, date) {
       return $http({
         method: 'POST',
