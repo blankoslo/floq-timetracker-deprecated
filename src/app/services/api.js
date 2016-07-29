@@ -41,10 +41,10 @@ export default ($http) => {
       });
     },
 
-    getHolidays(from_date, to_date) {
+    getHolidays(fromDate, toDate) {
       return $http({
         method: 'GET',
-        url: `${apiUri}/holidays?date=gte.${from_date}&date=lte.${to_date}`
+        url: `${apiUri}/holidays?date=gte.${fromDate}&date=lte.${toDate}`
       });
     },
 
