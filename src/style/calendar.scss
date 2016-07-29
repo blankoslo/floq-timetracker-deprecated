@@ -41,7 +41,7 @@ calendar {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      .sunday {
+      .holiday {
         color: $color-pretty-pink;
       }
       .dayInMonth {
@@ -63,7 +63,7 @@ calendar {
         background-color: $color-pretty-pink;
         color: white;
         .logged,
-        .sunday {
+        .holiday {
           color: white;
         }
         position: relative;
