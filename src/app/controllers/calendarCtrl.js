@@ -37,7 +37,9 @@ export default class CalendarCtrl {
     $scope.week = this.buildWeek(weekStart);
 
     function fetchHolidaysForWeek() {
-      Api.getHolidays($scope.week[0].date, $scope.week[6].date)
+      const monday = $scope.week[0].date;
+      const friday = $scope.week[4].date;
+      Api.getHolidays(monday, friday)
             .then((result) => {
               const holidaysThisWeek = result.data;
               $scope.availableHours = (5 - holidaysThisWeek.length) * 7.5;
