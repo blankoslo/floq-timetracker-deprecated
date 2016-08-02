@@ -59,6 +59,17 @@ export default ($http) => {
       });
     },
 
+    getAccumulatedOvertime(employeeId, endDate) {
+      return $http({
+        method: 'POST',
+        url: `${apiUri}/rpc/accumulated_overtime_for_employee`,
+        data: {
+          employee_id: employeeId,
+          end_date: endDate
+        }
+      });
+    },
+
     logEntry(project, employeeId, date, minutes) {
       return $http({
         method: 'POST',

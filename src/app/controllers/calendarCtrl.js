@@ -3,6 +3,7 @@ import moment from 'moment';
 export default class CalendarCtrl {
   constructor($scope, $rootScope, Api, Auth) {
     let weekStart = moment().startOf('isoweek');
+    const today = moment();
     $scope.loading = true;
 
     function appendTime(date, time) {
@@ -55,6 +56,19 @@ export default class CalendarCtrl {
             });
     }
 
+    function fetchOvertime() {
+      if (Auth.getEmployee().id) {
+        const displayingCurrentWeek = $scope.week.filter(
+          d => d.date === today.format('YYYY-MM-DD')).length > 0;
+        const endOfWeek = $scope.week[6].date;
+        const endDate = displayingCurrentWeek ? today.format('YYYY-MM-DD') : endOfWeek;
+        Api.getAccumulatedOvertime(Auth.getEmployee().id, endDate).then((overtime) => {
+          const accumulatedOvertime = overtime.data[0].accumulated_overtime_for_employee;
+          $rootScope.$broadcast('overtimeChanged', endDate, accumulatedOvertime);
+        });
+      }
+    }
+
     $scope.displayWeek = () => {
       const weekNumber = weekStart.get('week');
       const weekEnd = weekStart.clone().add(6, 'day');
@@ -77,13 +91,18 @@ export default class CalendarCtrl {
 
     $scope.isSelected = (date) => moment(date).isSame($scope.selected, 'day');
 
+    function refreshViewData() {
+      fetchHoursForWeek();
+      fetchHolidaysForWeek();
+      fetchOvertime();
+    }
+
     $scope.previous = () => {
       weekStart = weekStart.clone().subtract(1, 'w');
       $scope.week = this.buildWeek(weekStart);
       $scope.selected = weekStart;
       $scope.weekNumber = weekStart.get('week');
-      fetchHoursForWeek();
-      fetchHolidaysForWeek();
+      refreshViewData();
     };
 
     $scope.next = () => {
@@ -91,9 +110,19 @@ export default class CalendarCtrl {
       $scope.week = this.buildWeek(weekStart);
       $scope.selected = weekStart;
       $scope.weekNumber = weekStart.get('week');
-      fetchHoursForWeek();
-      fetchHolidaysForWeek();
+      refreshViewData();
     };
+
+    $scope.$on('resetCalendar', () => {
+      weekStart = moment().startOf('isoweek');
+      $scope.selected = moment();
+      $scope.week = this.buildWeek(weekStart);
+      refreshViewData();
+    });
+
+    $scope.$on('userChanged', () => {
+      refreshViewData();
+    });
 
     $scope.$on('totalWeeklyHours', (event, hours) => {
       $scope.hours = hours;
@@ -103,21 +132,8 @@ export default class CalendarCtrl {
       $scope.hours += diff / 60;
     });
 
-    $scope.$on('userChanged', () => {
-      fetchHoursForWeek();
-      fetchHolidaysForWeek();
-    });
-
     $scope.$on('entryUpdated', (event, minutes, day) => {
       appendTime(day, minutes);
-    });
-
-    $scope.$on('resetCalendar', () => {
-      weekStart = moment().startOf('isoweek');
-      $scope.selected = moment();
-      $scope.week = this.buildWeek(weekStart);
-      fetchHoursForWeek();
-      fetchHolidaysForWeek();
     });
 
     $scope.$watch('selected', () => {
