@@ -36,6 +36,25 @@ export default class CalendarCtrl {
     $scope.selected = moment();
     $scope.week = this.buildWeek(weekStart);
 
+    function fetchHolidaysForWeek() {
+      const monday = $scope.week[0].date;
+      const friday = $scope.week[4].date;
+      Api.getHolidays(monday, friday)
+            .then((result) => {
+              const holidaysThisWeek = result.data;
+              $scope.availableHours = (5 - holidaysThisWeek.length) * 7.5;
+              $scope.holidays = [];
+              if (holidaysThisWeek.length > 0) {
+                const holidayDates = holidaysThisWeek.map(x => x.date);
+                $scope.week.forEach((weekday, index) => {
+                  if (holidayDates.indexOf(weekday.date) > -1) {
+                    $scope.holidays.push(index);
+                  }
+                });
+              }
+            });
+    }
+
     $scope.displayWeek = () => {
       const weekNumber = weekStart.get('week');
       const weekEnd = weekStart.clone().add(6, 'day');
@@ -64,6 +83,7 @@ export default class CalendarCtrl {
       $scope.selected = weekStart;
       $scope.weekNumber = weekStart.get('week');
       fetchHoursForWeek();
+      fetchHolidaysForWeek();
     };
 
     $scope.next = () => {
@@ -72,10 +92,20 @@ export default class CalendarCtrl {
       $scope.selected = weekStart;
       $scope.weekNumber = weekStart.get('week');
       fetchHoursForWeek();
+      fetchHolidaysForWeek();
     };
+
+    $scope.$on('totalWeeklyHours', (event, hours) => {
+      $scope.hours = hours;
+    });
+
+    $scope.$on('entryUpdated', (event, diff) => {
+      $scope.hours += diff / 60;
+    });
 
     $scope.$on('userChanged', () => {
       fetchHoursForWeek();
+      fetchHolidaysForWeek();
     });
 
     $scope.$on('entryUpdated', (event, minutes, day) => {
@@ -87,6 +117,7 @@ export default class CalendarCtrl {
       $scope.selected = moment();
       $scope.week = this.buildWeek(weekStart);
       fetchHoursForWeek();
+      fetchHolidaysForWeek();
     });
 
     $scope.$watch('selected', () => {
