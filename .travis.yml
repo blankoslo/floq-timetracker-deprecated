@@ -26,6 +26,7 @@ deploy:
     skip_cleanup: true
     on:
       branch: develop
+      repo: blankoslo/floq-timetracker
   - provider: gcs
     cache_control: "max-age=3600"
     bucket: floq
@@ -38,3 +39,4 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
+      repo: blankoslo/floq-timetracker
