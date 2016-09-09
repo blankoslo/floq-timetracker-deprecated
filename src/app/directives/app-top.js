@@ -8,8 +8,9 @@ export default () => ({
       const negativeEmojis = ['🙄', '😔', '😩', '👀', '👷', '🙈', '🖕', '😳', '😏', '🙇', '😤'];
       const negativeEmoji = negativeEmojis[Math.floor(Math.random() * negativeEmojis.length)];
       const positiveEmoji = positiveEmojis[Math.floor(Math.random() * positiveEmojis.length)];
-      return overtime >= 0 ?
-      `${overtime} timer i pluss ${positiveEmoji}` : `${- overtime} timer i minus ${negativeEmoji}`;
+      return overtime >= 0
+        ? `${overtime} ${overtime === 1 ? 'time' : 'timer'} i pluss ${positiveEmoji}`
+        : `${- overtime} ${overtime === -1 ? 'time' : 'timer'} i minus ${negativeEmoji}`;
     }
     $scope.bg = Auth.getTopImage();
     $scope.$on('userChanged', (event, user) => {
