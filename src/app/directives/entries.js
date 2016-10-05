@@ -1,4 +1,4 @@
-import EntriesCtrl from '../controllers/entriesCtrl.js';
+import EntriesCtrl from '../controllers/entriesCtrl';
 
 export default () => ({
   template: require('../views/entries.html'),

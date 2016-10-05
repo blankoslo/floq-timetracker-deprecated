@@ -1,4 +1,4 @@
-import appCtrl from '../controllers/appCtrl.js';
+import appCtrl from '../controllers/appCtrl';
 
 export default () => ({
   template: require('../views/app.html'),

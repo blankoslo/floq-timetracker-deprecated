@@ -1,4 +1,4 @@
-import CalendarCtrl from '../controllers/calendarCtrl.js';
+import CalendarCtrl from '../controllers/calendarCtrl';
 
 export default () => ({
   controller: CalendarCtrl,

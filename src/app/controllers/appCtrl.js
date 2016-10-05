@@ -2,7 +2,7 @@ export default class AppCtrl {
   constructor($scope, $rootScope, Auth, Api, Notification) {
     const APPLICATION_ROOT = 'timestamp';
 
-    this.getOverrideUser = (fromPath) =>
+    this.getOverrideUser = fromPath =>
       fromPath
       .substring(fromPath.lastIndexOf(APPLICATION_ROOT) + APPLICATION_ROOT.length)
       .replace(/\//g, '');

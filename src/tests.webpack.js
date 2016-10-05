@@ -2,7 +2,7 @@
 // Avoids some weird issues when using webpack + angular.
 
 import 'angular';
-import 'angular-mocks/angular-mocks';
+import 'angular-mocks/angular-mocks'; // eslint-disable-line import/no-extraneous-dependencies
 
 global.componentHandler = false; // needed due to MDL
 

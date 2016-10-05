@@ -2,16 +2,16 @@ import angular from 'angular';
 import moment from 'moment';
 import ngTouch from 'angular-touch';
 
-import appDirective from './directives/app.js';
-import entriesDirective from './directives/entries.js';
-import calendar from './directives/calendar.js';
-import projectAppender from './directives/projectAppender.js';
-import apiFactory from './services/api.js';
-import authFactory from './services/auth.js';
-import tokenInterceptor from './services/tokenInterceptor.js';
-import appTopDirective from './directives/app-top.js';
-import focusDirective from './directives/focus.js';
-import notification from './services/notification.js';
+import appDirective from './directives/app';
+import entriesDirective from './directives/entries';
+import calendar from './directives/calendar';
+import projectAppender from './directives/projectAppender';
+import apiFactory from './services/api';
+import authFactory from './services/auth';
+import tokenInterceptor from './services/tokenInterceptor';
+import appTopDirective from './directives/app-top';
+import focusDirective from './directives/focus';
+import notification from './services/notification';
 
 import '../style/main.scss';
 

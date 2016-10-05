@@ -1,5 +1,20 @@
 import moment from 'moment';
 
+const buildWeek = (start) => {
+  const weekDays = [];
+  let date = start.clone();
+  for (let i = 0; i < 7; i += 1) {
+    weekDays.push({
+      dayInMonth: date.get('date'),
+      nameOfDay: date.format('ddd'),
+      date: date.format('YYYY-MM-DD'),
+      logged: 0
+    });
+    date = date.clone().add(1, 'd');
+  }
+  return weekDays;
+};
+
 export default class CalendarCtrl {
   constructor($scope, $rootScope, Api, Auth) {
     let weekStart = moment().startOf('isoweek');
@@ -35,7 +50,7 @@ export default class CalendarCtrl {
     }
 
     $scope.selected = moment();
-    $scope.week = this.buildWeek(weekStart);
+    $scope.week = buildWeek(weekStart);
 
     function fetchHolidaysForWeek() {
       const monday = $scope.week[0].date;
@@ -89,7 +104,7 @@ export default class CalendarCtrl {
       $scope.selected = moment(date);
     };
 
-    $scope.isSelected = (date) => moment(date).isSame($scope.selected, 'day');
+    $scope.isSelected = date => moment(date).isSame($scope.selected, 'day');
 
     function refreshViewData() {
       fetchHoursForWeek();
@@ -99,7 +114,7 @@ export default class CalendarCtrl {
 
     $scope.previous = () => {
       weekStart = weekStart.clone().subtract(1, 'w');
-      $scope.week = this.buildWeek(weekStart);
+      $scope.week = buildWeek(weekStart);
       $scope.selected = weekStart;
       $scope.weekNumber = weekStart.get('week');
       refreshViewData();
@@ -107,7 +122,7 @@ export default class CalendarCtrl {
 
     $scope.next = () => {
       weekStart = weekStart.clone().add(1, 'w');
-      $scope.week = this.buildWeek(weekStart);
+      $scope.week = buildWeek(weekStart);
       $scope.selected = weekStart;
       $scope.weekNumber = weekStart.get('week');
       refreshViewData();
@@ -116,7 +131,7 @@ export default class CalendarCtrl {
     $scope.$on('resetCalendar', () => {
       weekStart = moment().startOf('isoweek');
       $scope.selected = moment();
-      $scope.week = this.buildWeek(weekStart);
+      $scope.week = buildWeek(weekStart);
       refreshViewData();
     });
 
@@ -139,20 +154,5 @@ export default class CalendarCtrl {
     $scope.$watch('selected', () => {
       $rootScope.$broadcast('dateChanged', $scope.selected.format('YYYY-MM-DD'));
     });
-  }
-
-  buildWeek(start) {
-    const weekDays = [];
-    let date = start.clone();
-    for (let i = 0; i < 7; i++) {
-      weekDays.push({
-        dayInMonth: date.get('date'),
-        nameOfDay: date.format('ddd'),
-        date: date.format('YYYY-MM-DD'),
-        logged: 0
-      });
-      date = date.clone().add(1, 'd');
-    }
-    return weekDays;
   }
 }
