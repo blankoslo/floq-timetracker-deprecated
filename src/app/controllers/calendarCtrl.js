@@ -115,6 +115,7 @@ export default class CalendarCtrl {
     $scope.isSelected = date => moment(date).isSame($scope.selected, 'day');
 
     $scope.lock = (date) => {
+      if (moment(date).isSame($scope.locked, 'day')) return;
       Api.logLockedDate(Auth.getEmployee().id, date);
       $scope.locked = moment(date);
     };
