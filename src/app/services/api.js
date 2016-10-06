@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 export default ($http) => {
   const config = window.config = window.config || {};
   const apiUri = config.apiUri || 'http://localhost:3001';
@@ -72,8 +70,11 @@ export default ($http) => {
       });
     },
 
-    getLockedDate() {
-      return moment().format('YYYY-MM-DD');
+    getLockedDate(employeeId) {
+      return $http({
+        method: 'GET',
+        url: `${apiUri}/timelock?employee=eq.${employeeId}&select=commit_date&order=created.desc&limit=1`
+      });
     },
 
     logEntry(project, employeeId, date, minutes) {
@@ -91,7 +92,14 @@ export default ($http) => {
     },
 
     logLockedDate(employeeId, date) {
-      return { employeeId, date };
+      return $http({
+        method: 'POST',
+        url: `${apiUri}/timelock`,
+        data: {
+          employee: employeeId,
+          commit_date: date,
+        }
+      });
     }
 
   };
