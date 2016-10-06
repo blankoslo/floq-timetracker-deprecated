@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default ($http) => {
   const config = window.config = window.config || {};
   const apiUri = config.apiUri || 'http://localhost:3001';
@@ -70,6 +72,10 @@ export default ($http) => {
       });
     },
 
+    getLockedDate() {
+      return moment().format('YYYY-MM-DD');
+    },
+
     logEntry(project, employeeId, date, minutes) {
       return $http({
         method: 'POST',
@@ -82,6 +88,11 @@ export default ($http) => {
           creator: employeeId // FIXME: this should be the logged-in user
         }
       });
+    },
+
+    logLockedDate(employeeId, date) {
+      return { employeeId, date };
     }
+
   };
 };

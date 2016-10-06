@@ -50,6 +50,7 @@ export default class CalendarCtrl {
     }
 
     $scope.selected = moment();
+    $scope.locked = null;
     $scope.week = buildWeek(weekStart);
 
     function fetchHolidaysForWeek() {
@@ -105,6 +106,12 @@ export default class CalendarCtrl {
     };
 
     $scope.isSelected = date => moment(date).isSame($scope.selected, 'day');
+
+    $scope.lock = (date) => {
+      $scope.locked = moment(date);
+    };
+
+    $scope.isLocked = date => moment(date).isSameOrBefore($scope.locked, 'day');
 
     function refreshViewData() {
       fetchHoursForWeek();
