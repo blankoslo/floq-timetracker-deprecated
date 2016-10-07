@@ -1,5 +1,20 @@
 import moment from 'moment';
 
+const buildWeek = (start) => {
+  const weekDays = [];
+  let date = start.clone();
+  for (let i = 0; i < 7; i += 1) {
+    weekDays.push({
+      dayInMonth: date.get('date'),
+      nameOfDay: date.format('ddd'),
+      date: date.format('YYYY-MM-DD'),
+      logged: 0
+    });
+    date = date.clone().add(1, 'd');
+  }
+  return weekDays;
+};
+
 export default class CalendarCtrl {
   constructor($scope, $rootScope, Api, Auth) {
     let weekStart = moment().startOf('isoweek');
@@ -34,8 +49,16 @@ export default class CalendarCtrl {
         });
     }
 
+    function fetchLockedDate() {
+      Api.getLockedDate(Auth.getEmployee().id)
+        .then((result) => {
+          $scope.locked = (result.data.length > 0 ? moment(result.data[0].commit_date) : null);
+        });
+    }
+
     $scope.selected = moment();
-    $scope.week = this.buildWeek(weekStart);
+    $scope.locked = null;
+    $scope.week = buildWeek(weekStart);
 
     function fetchHolidaysForWeek() {
       const monday = $scope.week[0].date;
@@ -89,7 +112,15 @@ export default class CalendarCtrl {
       $scope.selected = moment(date);
     };
 
-    $scope.isSelected = (date) => moment(date).isSame($scope.selected, 'day');
+    $scope.isSelected = date => moment(date).isSame($scope.selected, 'day');
+
+    $scope.lock = (date) => {
+      if (moment(date).isSame($scope.locked, 'day')) return;
+      Api.logLockedDate(Auth.getEmployee().id, date);
+      $scope.locked = moment(date);
+    };
+
+    $scope.isLocked = date => ($scope.locked ? moment(date).isSameOrBefore($scope.locked, 'day') : false);
 
     function refreshViewData() {
       fetchHoursForWeek();
@@ -99,7 +130,7 @@ export default class CalendarCtrl {
 
     $scope.previous = () => {
       weekStart = weekStart.clone().subtract(1, 'w');
-      $scope.week = this.buildWeek(weekStart);
+      $scope.week = buildWeek(weekStart);
       $scope.selected = weekStart;
       $scope.weekNumber = weekStart.get('week');
       refreshViewData();
@@ -107,7 +138,7 @@ export default class CalendarCtrl {
 
     $scope.next = () => {
       weekStart = weekStart.clone().add(1, 'w');
-      $scope.week = this.buildWeek(weekStart);
+      $scope.week = buildWeek(weekStart);
       $scope.selected = weekStart;
       $scope.weekNumber = weekStart.get('week');
       refreshViewData();
@@ -116,12 +147,13 @@ export default class CalendarCtrl {
     $scope.$on('resetCalendar', () => {
       weekStart = moment().startOf('isoweek');
       $scope.selected = moment();
-      $scope.week = this.buildWeek(weekStart);
+      $scope.week = buildWeek(weekStart);
       refreshViewData();
     });
 
     $scope.$on('userChanged', () => {
       refreshViewData();
+      fetchLockedDate();
     });
 
     $scope.$on('totalWeeklyHours', (event, hours) => {
@@ -139,20 +171,5 @@ export default class CalendarCtrl {
     $scope.$watch('selected', () => {
       $rootScope.$broadcast('dateChanged', $scope.selected.format('YYYY-MM-DD'));
     });
-  }
-
-  buildWeek(start) {
-    const weekDays = [];
-    let date = start.clone();
-    for (let i = 0; i < 7; i++) {
-      weekDays.push({
-        dayInMonth: date.get('date'),
-        nameOfDay: date.format('ddd'),
-        date: date.format('YYYY-MM-DD'),
-        logged: 0
-      });
-      date = date.clone().add(1, 'd');
-    }
-    return weekDays;
   }
 }

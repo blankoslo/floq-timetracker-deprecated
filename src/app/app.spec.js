@@ -1,7 +1,8 @@
+import 'babel-polyfill'; // eslint-disable-line import/no-extraneous-dependencies
+
 import './app';
-import 'babel-polyfill';
-import appCtrl from './controllers/appCtrl.js';
-import entriesCtrl from './controllers/entriesCtrl.js';
+import appCtrl from './controllers/appCtrl';
+import entriesCtrl from './controllers/entriesCtrl';
 
 describe('app', () => {
   describe('AppCtrl', () => {

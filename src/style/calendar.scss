@@ -38,8 +38,6 @@ calendar {
       text-transform: capitalize;
       color: $color-gray-text;
       height: 86px;
-      display: flex;
-      flex-direction: column;
       justify-content: space-between;
       .holiday {
         color: $color-pretty-pink;

@@ -1,4 +1,4 @@
-export default ($timeout) => ({
+export default $timeout => ({
   scope: {
     trigger: '@focus'
   },
