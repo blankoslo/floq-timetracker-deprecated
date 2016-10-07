@@ -126,7 +126,6 @@ export default class CalendarCtrl {
       fetchHoursForWeek();
       fetchHolidaysForWeek();
       fetchOvertime();
-      fetchLockedDate();
     }
 
     $scope.previous = () => {
@@ -154,6 +153,7 @@ export default class CalendarCtrl {
 
     $scope.$on('userChanged', () => {
       refreshViewData();
+      fetchLockedDate();
     });
 
     $scope.$on('totalWeeklyHours', (event, hours) => {
