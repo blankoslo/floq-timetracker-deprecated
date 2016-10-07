@@ -49,7 +49,15 @@ export default class CalendarCtrl {
         });
     }
 
+    function fetchLockedDate() {
+      Api.getLockedDate(Auth.getEmployee().id)
+        .then((result) => {
+          $scope.locked = (result.data.length > 0 ? moment(result.data[0].commit_date) : null);
+        });
+    }
+
     $scope.selected = moment();
+    $scope.locked = null;
     $scope.week = buildWeek(weekStart);
 
     function fetchHolidaysForWeek() {
@@ -106,10 +114,19 @@ export default class CalendarCtrl {
 
     $scope.isSelected = date => moment(date).isSame($scope.selected, 'day');
 
+    $scope.lock = (date) => {
+      if (moment(date).isSame($scope.locked, 'day')) return;
+      Api.logLockedDate(Auth.getEmployee().id, date);
+      $scope.locked = moment(date);
+    };
+
+    $scope.isLocked = date => ($scope.locked ? moment(date).isSameOrBefore($scope.locked, 'day') : false);
+
     function refreshViewData() {
       fetchHoursForWeek();
       fetchHolidaysForWeek();
       fetchOvertime();
+      fetchLockedDate();
     }
 
     $scope.previous = () => {

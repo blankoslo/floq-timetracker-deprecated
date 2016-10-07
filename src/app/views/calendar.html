@@ -18,6 +18,11 @@
 
     <ul class="week">
         <li class="day" ng-repeat="day in week" ng-click="select(day.date)" title="{{day.date}}" ng-class="{selected: isSelected(day.date)}">
+            <span ng-click="lock(day.date); ; $event.stopPropagation();">
+              <button class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">{{isLocked(day.date) ? 'lock' : 'lock_open'}}</i>
+              </button>
+            </span>
             <span class="dayInMonth" ng-class="{holiday: $index === 6 || $index === 5 || holidays.indexOf($index) > -1 }">{{day.dayInMonth}}</span>
             <span class="nameOfDay">{{day.nameOfDay}}</span>
             <span class="logged" ng-class="{empty: day.logged == 0, loading: loading}">{{day.logged / 60}}</span>
