@@ -70,13 +70,6 @@ export default ($http) => {
       });
     },
 
-    getLockedDate(employeeId) {
-      return $http({
-        method: 'GET',
-        url: `${apiUri}/timelock?employee=eq.${employeeId}&select=commit_date&order=created.desc&limit=1`
-      });
-    },
-
     logEntry(project, employeeId, date, minutes) {
       return $http({
         method: 'POST',
@@ -90,17 +83,5 @@ export default ($http) => {
         }
       });
     },
-
-    logLockedDate(employeeId, date) {
-      return $http({
-        method: 'POST',
-        url: `${apiUri}/timelock`,
-        data: {
-          employee: employeeId,
-          commit_date: date,
-        }
-      });
-    }
-
   };
 };
