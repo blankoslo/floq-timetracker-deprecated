@@ -4,6 +4,10 @@
 
 Timetracking for Blank
 
+To run:
+
+    npm install && npm start
+
 ## Intranet config
     {
         "short_name": "timetracker",
