@@ -1,23 +1,40 @@
-<table style="padding: 1em"> 
-	<thead>
-		<tr>
-			<th style="text-align: left">Prosjekt</th>
-			<th>Mandag</th>
-			<th>Tirsdag</th>
-			<th>Onsdag</th>
-			<th>Torsdag</th>
-			<th>Fredag</th>
-			<th>Lørdag</th>
-			<th>Søndag</th>
-		</tr>
-	</thead>
-	<tr ng-repeat="entry in entries | orderBy:['customer', 'project']">
-		<td>
-			<span class="customer">{{ entry.customer }}</span> /
-      <span class="name">{{ entry.project }}</span>
-    </td>
-		<td ng-repeat="day in entry.days track by $index" style="width: 4em; text-align: center">
-			{{ day }}
-		</td>
-	</tr>
-</table>
+<div style="width:100%;">
+  <table class="mdl-data-table mdl-shadow--2dp" style="margin: 2em auto;">
+  	<thead>
+  		<tr>
+  			<th class="mdl-data-table__cell--non-numeric">Prosjekt</th>
+  			<th class="mdl-data-table__cell--non-numeric">Mandag</th>
+  			<th class="mdl-data-table__cell--non-numeric">Tirsdag</th>
+  			<th class="mdl-data-table__cell--non-numeric">Onsdag</th>
+  			<th class="mdl-data-table__cell--non-numeric">Torsdag</th>
+  			<th class="mdl-data-table__cell--non-numeric">Fredag</th>
+  			<th class="mdl-data-table__cell--non-numeric">Lørdag</th>
+  			<th class="mdl-data-table__cell--non-numeric">Søndag</th>
+        <th class="mdl-data-table__cell--non-numeric">Sum</th>
+  		</tr>
+  	</thead>
+  	<tr ng-repeat="entry in entries | orderBy:['customer', 'project']">
+  		<td class="mdl-data-table__cell--non-numeric">
+  			<span class="customer">{{ entry.customer }}</span> /
+        <span class="name">{{ entry.project }}</span>
+      </td>
+  		<td ng-repeat="day in entry.days track by $index" style="text-align: center">
+        {{ day }}
+  		</td>
+      <th style="text-align: center">
+        {{ entry.sum }}
+      </th>
+  	</tr>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Sum</th>
+      <th style="text-align: center">{{ sumPerDay(0) }}</th>
+      <th style="text-align: center">{{ sumPerDay(1) }}</th>
+      <th style="text-align: center">{{ sumPerDay(2) }}</th>
+      <th style="text-align: center">{{ sumPerDay(3) }}</th>
+      <th style="text-align: center">{{ sumPerDay(4) }}</th>
+      <th style="text-align: center">{{ sumPerDay(5) }}</th>
+      <th style="text-align: center">{{ sumPerDay(6) }}</th>
+      <th style="text-align: center">{{ weekSum() }}</th>
+    </tr>
+  </table>
+</div>

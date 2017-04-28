@@ -117,6 +117,7 @@ export default class CalendarCtrl {
       $scope.week = buildWeek(weekStart);
       $scope.selected = weekStart;
       $scope.weekNumber = weekStart.get('week');
+      $rootScope.$broadcast('weekChanged', $scope.selected.format('YYYY-MM-DD'));
       refreshViewData();
     };
 
@@ -125,6 +126,7 @@ export default class CalendarCtrl {
       $scope.week = buildWeek(weekStart);
       $scope.selected = weekStart;
       $scope.weekNumber = weekStart.get('week');
+      $rootScope.$broadcast('weekChanged', $scope.selected.format('YYYY-MM-DD'));
       refreshViewData();
     };
 
