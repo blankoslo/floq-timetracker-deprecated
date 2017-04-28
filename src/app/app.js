@@ -4,6 +4,7 @@ import ngTouch from 'angular-touch';
 
 import appDirective from './directives/app';
 import entriesDirective from './directives/entries';
+import tableviewDirective from './directives/tableView';
 import calendar from './directives/calendar';
 import projectAppender from './directives/projectAppender';
 import apiFactory from './services/api';
@@ -20,6 +21,7 @@ const MODULE_NAME = 'timestamp';
 angular.module(MODULE_NAME, [ngTouch])
   .directive('app', appDirective)
   .directive('entries', entriesDirective)
+  .directive('tableview', tableviewDirective)
   .directive('calendar', calendar)
   .directive('appendProject', projectAppender)
   .directive('appTop', appTopDirective)
