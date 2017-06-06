@@ -1,11 +1,15 @@
 import moment from 'moment';
 
 export default class EntriesCtrl {
-  constructor($scope, $rootScope, Api, Auth, Notification) {
+  constructor($scope, $rootScope, $window, Api, Auth, Notification) {
     this.MINUTE_INCREMENT = 30;
     this.MINUTE_INCREMENT_FIRST_CLICK = 450;
     let selectedDay = moment().format('YYYY-MM-DD');
     $scope.loading = true;
+
+    function handleLogError() {
+      $window.alert('Noe gikk galt under lagringen av timene. Last inn siden på nytt.');
+    }
 
     function fetchEntries() {
       if (Auth.getEmployee().id) {
@@ -31,7 +35,7 @@ export default class EntriesCtrl {
           Auth.getEmployee().id,
           selectedDay,
           change.change)
-        .then(() => {});
+          .then(() => {}, handleLogError);
     };
 
     $scope.removeHour = (entry) => {
@@ -44,7 +48,7 @@ export default class EntriesCtrl {
           Auth.getEmployee().id,
           selectedDay,
           change.change)
-        .then(() => {});
+          .then(() => {}, handleLogError);
     };
 
     $scope.updateEntry = (entry) => {
@@ -59,9 +63,7 @@ export default class EntriesCtrl {
               Auth.getEmployee().id,
               selectedDay,
               diff)
-            .then(() => {
-              fetchEntries();
-            });
+            .then(() => { fetchEntries(); }, handleLogError);
         }
       }
     };
