@@ -30,7 +30,7 @@ export default ($http) => {
         url: `${apiUri}/employees?email=ilike.${window.userEmail}`,
         headers: {
           Prefer: 'plurality=singular',               // for postgrest 0.3.x compatibility
-          Accept: 'application/vnd.pgrst.object+json' // request an object – not an array
+          Accept: 'application/vnd.pgrst.object+json' // request an object – not an array
         }
       });
     },
