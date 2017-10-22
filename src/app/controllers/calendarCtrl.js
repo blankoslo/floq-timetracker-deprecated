@@ -78,8 +78,7 @@ export default class CalendarCtrl {
         const endOfWeek = $scope.week[6].date;
         const endDate = displayingCurrentWeek ? today.format('YYYY-MM-DD') : endOfWeek;
         Api.getAccumulatedOvertime(Auth.getEmployee().id, endDate).then((overtime) => {
-          const accumulatedOvertime = overtime.data[0].accumulated_overtime_for_employee;
-          $rootScope.$broadcast('overtimeChanged', endDate, accumulatedOvertime);
+          $rootScope.$broadcast('overtimeChanged', endDate, overtime);
         });
       }
     }
