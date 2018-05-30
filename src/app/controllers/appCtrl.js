@@ -33,9 +33,8 @@ export default class AppCtrl {
       }
     }, () => {
       //Notification.error('Fant ikke innlogget ansatt', 100000);
-      //Cookie har mest sannsynlig godt ut, vi clearer cookie, og reloader
-      document.cookie = "connect.sid=;path=/;";
-      window.location.reload(true);
+      //Prøver å gå en tur om login-siden
+      window.location = "/login?to=/timestamp";
     });
   }
 }
