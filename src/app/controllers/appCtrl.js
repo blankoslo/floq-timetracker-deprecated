@@ -32,9 +32,9 @@ export default class AppCtrl {
         broadcastEmployee();
       }
     }, () => {
-      //Notification.error('Fant ikke innlogget ansatt', 100000);
-      //Prøver å gå en tur om login-siden
-      window.location = "/login?to=/timestamp";
+      // Notification.error('Fant ikke innlogget ansatt', 100000);
+      // Prøver å gå en tur om login-siden
+      window.location = '/login?to=/timestamp';
     });
   }
 }
